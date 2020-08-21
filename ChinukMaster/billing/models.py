@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Trener(models.Model):
@@ -81,3 +82,29 @@ class Address(models.Model):
 
     def __str__(self):
         return self.address
+
+class Payment(models.Model):
+    client = models.ForeignKey(Client, on_delete=models.PROTECT, verbose_name='Плательщик')
+    amount = models.FloatField(verbose_name='Сумма', default=60)
+    payment_to_choices = [
+        ('G', 'В группу'),
+        ('I', 'Индивидуально')
+    ]
+    payment_type_choices = [
+        ('O', 'Разовый платеж'),
+        ('M', 'Месячный взнос')
+    ]
+    payment_to = models.CharField(max_length=1, choices=payment_to_choices, default='G', verbose_name='Направление оплаты')
+    payment_type = models.CharField(max_length=1, choices=payment_type_choices, default='M', verbose_name='Тип оплаты')
+    trener = models.ForeignKey(Trener, on_delete=models.PROTECT, verbose_name='Тренер', blank=True, null=True)
+    group = models.ForeignKey(Group, on_delete=models.PROTECT, verbose_name='Группа', blank=True, null=True)
+    date = models.DateField(verbose_name='Дата оплаты', default=timezone.now)
+
+    def __str__(self):
+        if self.trener:
+            return f'{self.date}: {self.amount} BYN'
+        return f'{self.date}: {self.amount} BYN'
+
+    class Meta:
+        verbose_name = 'Оплата'
+        verbose_name_plural = 'Оплаты'
