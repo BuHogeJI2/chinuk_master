@@ -10,12 +10,14 @@ def index(request):
     treners = Trener.objects.all()
     addresses = Address.objects.all()
     groups = Group.objects.all()
+    payments = Payment.objects.all()
 
     return render(request, 'billing/index.html', {
         'clients': clinets,
         'treners': treners,
         'addresses': addresses,
         'groups': groups,
+        'payments':payments,
     })
 
 def detail_client(request, id):
