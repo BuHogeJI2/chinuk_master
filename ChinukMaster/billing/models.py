@@ -100,6 +100,9 @@ class Payment(models.Model):
     group = models.ForeignKey(Group, on_delete=models.PROTECT, verbose_name='Группа', blank=True, null=True)
     date = models.DateField(verbose_name='Дата оплаты', default=timezone.now)
 
+    def today(self):
+        return self.date == timezone.now()
+
     def __str__(self):
         if self.trener:
             return f'{self.date}: {self.amount} BYN'

@@ -22,8 +22,10 @@ def detail_client(request, id):
     cli = Client.objects.get(id=id)
     groups = cli.groups.all()
     treners = cli.treners.all()
+    payments = cli.payment_set.all()
     return render(request, 'billing/detail_client.html', {
         'client': cli,
         'groups': groups,
         'treners': treners,
+        'payments': payments,
     })

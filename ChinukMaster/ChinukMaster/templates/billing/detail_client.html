@@ -1,12 +1,20 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'billing.css' %}">
     <title>DETAIL CLIENT</title>
 </head>
 <body>
-    <div class="client-info">
+
+    <div class="detail-photo">
+
+    </div>
+
+    <div class="detail-info">
         
         <p>Членская карта: {{client.member_card}}</p>
         <p>ФИО: {{client.name}}</p>
@@ -34,7 +42,19 @@
 
     </div>
 
-    
+    <div class="payment-history">
+
+        {% if payments %}
+
+            <p>История оплат</p>
+
+            {% for payment in payments %}
+                <p>{{payment}}</p>
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
 
 </body>
 </html>
