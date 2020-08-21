@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DETAIL CLIENT</title>
+</head>
+<body>
+    <div class="client-info">
+        
+        <p>Членская карта: {{client.member_card}}</p>
+        <p>ФИО: {{client.name}}</p>
+        <p>Номер телефона: {{client.tel_number}}</p>
+
+        {% if client.info %}
+            <p>Дополнительная информация: {{client.info}}</p>
+        {% endif %}
+
+        {% if client.cl_type == 'G' or client.cl_type == 'B' %}
+            <p>Группы:</p>
+            {% for group in groups %}
+                <p> - {{group}}</p>
+            {% endfor %}
+
+        {% endif %}
+
+        {% if client.cl_type == 'I' or client.cl_type == 'B' %}
+            <p>Тренеры:</p>
+            {% for trener in treners %}
+                <p> - {{trener}}</p>
+            {% endfor %}
+
+        {% endif %}
+
+    </div>
+
+    
+
+</body>
+</html>

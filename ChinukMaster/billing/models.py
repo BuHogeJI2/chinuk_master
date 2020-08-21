@@ -54,8 +54,8 @@ class Client(models.Model):
         ('B', 'Смешанный'),
     ]
     cl_type = models.CharField(verbose_name='Тип клиента', max_length=1, choices=training_type_choices, default='G')
-    treners = models.ManyToManyField(Trener, verbose_name='Тренер', blank=True, related_name='client_trener')
-    groups = models.ManyToManyField(Group, verbose_name='Группа', blank=True, related_name='client_group')
+    treners = models.ManyToManyField(Trener, verbose_name='Тренер', blank=True)
+    groups = models.ManyToManyField(Group, verbose_name='Группа', blank=True)
 
     def __str__(self):
         return self.name

@@ -17,7 +17,7 @@
     
             {% for client in clients %}
     
-                <p>{{client}}</p>
+                <a href="{% url 'detail_client' client.id %}"><p>{{client}}</p></a>
     
             {% endfor %}
     

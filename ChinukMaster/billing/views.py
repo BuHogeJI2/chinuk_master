@@ -5,15 +5,25 @@ from .models import *
 # Create your views here.
 
 
-def test(request):
+def index(request):
     clinets = Client.objects.all()
     treners = Trener.objects.all()
     addresses = Address.objects.all()
     groups = Group.objects.all()
 
-    return render(request, 'billing/test.html', {
+    return render(request, 'billing/index.html', {
         'clients': clinets,
         'treners': treners,
         'addresses': addresses,
         'groups': groups,
+    })
+
+def detail_client(request, id):
+    cli = Client.objects.get(id=id)
+    groups = cli.groups.all()
+    treners = cli.treners.all()
+    return render(request, 'billing/detail_client.html', {
+        'client': cli,
+        'groups': groups,
+        'treners': treners,
     })
