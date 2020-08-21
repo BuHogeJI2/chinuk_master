@@ -28,10 +28,11 @@ class Group(models.Model):
         ('M', 'ММА')
     ]
 
-    gr_type = models.CharField(max_length=1, choices=gr_type_choices)
-    sport_type = models.CharField(max_length=1, choices = sport_type_choices)
-    time = models.TimeField()
-    trener = models.ForeignKey('Trener', on_delete=models.PROTECT)
+    gr_type = models.CharField(verbose_name='Возраст', max_length=1, choices=gr_type_choices, default='A')
+    sport_type = models.CharField(verbose_name='Тип', max_length=1, choices = sport_type_choices, default='T')
+    time = models.TimeField(verbose_name='Время')
+    trener = models.ForeignKey('Trener', verbose_name='Тренер', on_delete=models.PROTECT, null=True, blank=True)
+    address = models.ForeignKey('Address', verbose_name='Зал', on_delete=models.PROTECT, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Группа'
@@ -43,18 +44,18 @@ class Group(models.Model):
         return ' '.join([name, str(self.time)])
 
 class Client(models.Model):
-    member_card = models.CharField(max_length=4, blank=True, null=True)
-    name = models.CharField(max_length=50, blank=True, null=True)
-    tel_number = models.CharField(max_length=20, blank=True, null=True)
-    info = models.TextField(null=True, blank=True)
+    member_card = models.CharField(verbose_name='Членская карта', max_length=4, blank=True, null=True)
+    name = models.CharField(verbose_name='ФИО',max_length=50, blank=True, null=True)
+    tel_number = models.CharField(verbose_name='Номер телефона', max_length=20, blank=True, null=True)
+    info = models.TextField(verbose_name='Дополнительная информация', null=True, blank=True)
     training_type_choices = [
-        ('I', 'Individual'),
-        ('G', 'Group'),
-        ('B', 'BOTH'),
+        ('I', 'Индивидуал'),
+        ('G', 'В группе'),
+        ('B', 'Смешанный'),
     ]
-    cl_type = models.CharField(max_length=1, choices=training_type_choices, default='G', blank=True, null=True)
-    treners = models.ManyToManyField(Trener, blank=True, null=True, related_name='client_trener')
-    groups = models.ManyToManyField(Group, blank=True, null=True, related_name='client_group')
+    cl_type = models.CharField(verbose_name='Тип клиента', max_length=1, choices=training_type_choices, default='G')
+    treners = models.ManyToManyField(Trener, verbose_name='Тренер', blank=True, related_name='client_trener')
+    groups = models.ManyToManyField(Group, verbose_name='Группа', blank=True, related_name='client_group')
 
     def __str__(self):
         return self.name
@@ -73,7 +74,6 @@ class Address(models.Model):
 
     address = models.CharField(max_length=20, choices = address_choices)
     tel_number = models.CharField(max_length = 20)
-    groups = models.ForeignKey('Group', on_delete=models.PROTECT)
 
     class Meta:
         verbose_name = 'Адрес'
