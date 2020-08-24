@@ -1,0 +1,43 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}GROUP INFO{% endblock %}
+
+{% block content %}
+
+    <div class="detail-info">
+
+        <p>Тренер: {{group.trener}}</p>
+        {% if group.gr_type == 'A' %}
+            <p>Тип группы: Взрослая</p>
+        {% else %}
+            <p>Тип группы: Детская</p>
+        {% endif %}
+        {% if group.sport_type == 'B' %}
+            <p>Тип занятий: Классический бокс</p>
+        {% elif group.sport_type == 'T' %}
+            <p>Тип занятий: Тайский бокс</p>
+        {% elif group.sport_type == 'W' %}
+            <p>Тип занятий: Женская группа</p>
+        {% elif group.sport_type == 'M' %}
+            <p>Тип занятий: ММА</p>
+        {% else %}
+            <p>Wrong group type</p>
+        {% endif %}
+        <p>Время начала занятий: {{group.time}}</p>
+        <p>Зал: {{group.address}}</p>
+
+    </div>
+
+    <hr>
+
+    <div class="group-clients">
+
+        {% for client in group_clients %}
+
+            <a href="{% url 'detail_client' client.id %}"><p>{{client}}</p></a>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

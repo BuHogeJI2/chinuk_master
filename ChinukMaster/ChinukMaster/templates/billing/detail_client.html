@@ -1,14 +1,8 @@
-{% load static %}
+{% extends 'billing/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'billing.css' %}">
-    <title>DETAIL CLIENT</title>
-</head>
-<body>
+{% block title %}CLIENT INFO{% endblock %}
+
+{% block content %}
 
     <div class="detail-photo">
 
@@ -49,12 +43,11 @@
             <p>История оплат</p>
 
             {% for payment in payments %}
-                <p>{{payment}}</p>
+                <p> - {{payment}}</p>
             {% endfor %}
 
         {% endif %}
 
     </div>
 
-</body>
-</html>
+{% endblock %}

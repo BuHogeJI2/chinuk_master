@@ -1,82 +1,74 @@
-{% load static %}
+{% extends 'billing/base.html' %}
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'billing.css' %}">
-    <title>INDEX</title>
-</head>
-<body>
-    <div class="container info-list">
+{% block title %}INDEX{% endblock %}
 
-        <div class="div-clients content">
+{% block content %}
 
-            <h2>Клиенты</h2>
-    
-            {% for client in clients %}
-    
-                <a href="{% url 'detail_client' client.id %}"><p>{{client}}</p></a>
-    
-            {% endfor %}
-    
-        </div>
-    
-        <div class="div-treners content">
+<div class="container info-list">
 
-            <h2>Тренеры</h2>
-    
-            {% for trener in treners %}
-    
-                <p>{{trener}}</p>
-    
-            {% endfor %}
-    
-        </div>
-    
-        <div class="div-groups content">
+    <div class="div-clients content">
 
-            <h2>Группы</h2>
-    
-            {% for group in groups %}
-    
-                <p>{{group}}</p>
-    
-            {% endfor %}
-    
-        </div>
+        <h2>Клиенты</h2>
 
-        <div class="div-addresses content">
+        {% for client in clients %}
 
-            <h2>Залы</h2>
-    
-            {% for address in addresses %}
-    
-                <p>{{address}}</p>
-    
-            {% endfor %}
-    
-        </div>
+            <a href="{% url 'detail_client' client.id %}"><p>{{client}}</p></a>
 
-        <div class="div-payments content">
-
-            <h2>Оплаты</h2>
-    
-            {% for payment in payments %}
-    
-                <p>{{payment}}</p>
-    
-            {% endfor %}
-    
-        </div>
+        {% endfor %}
 
     </div>
 
-    <hr>
+    <div class="div-treners content">
 
+        <h2>Тренеры</h2>
 
-</body>
-</html>
+        {% for trener in treners %}
 
+            <p>{{trener}}</p>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="div-groups content">
+
+        <h2>Группы</h2>
+
+        {% for group in groups %}
+
+            <a href="{% url 'detail_group' group.id %}"><p>{{group}}</p></a>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="div-addresses content">
+
+        <h2>Залы</h2>
+
+        {% for address in addresses %}
+
+            <p>{{address}}</p>
+
+        {% endfor %}
+
+    </div>
+
+    <div class="div-payments content">
+
+        <h2>Оплаты</h2>
+
+        {% for payment in payments %}
+
+            <p>{{payment}}</p>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<hr>
+
+{% endblock %}
 

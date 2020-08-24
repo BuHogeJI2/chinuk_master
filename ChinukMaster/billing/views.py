@@ -31,3 +31,11 @@ def detail_client(request, id):
         'treners': treners,
         'payments': payments,
     })
+
+def detail_group(request, id):
+    group = Group.objects.get(id=id)
+    group_clients = group.client_set.all()
+    return render(request, 'billing/detail_group.html', {
+        'group': group,
+        'group_clients': group_clients,
+    })
