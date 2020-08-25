@@ -39,3 +39,6 @@ def detail_group(request, id):
         'group': group,
         'group_clients': group_clients,
     })
+
+def add_new_client(request):
+    return HttpResponse('HERE')
