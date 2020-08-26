@@ -65,7 +65,6 @@ def find_client(request):
                 if len(clients) > 1:
                     return HttpResponse('Find more than 2 cards!!!')
                 return redirect('detail_client', id=clients[0].id)
-                print(clients)
             else:
                 result = 'none'
                 return render(request, 'billing/find_client.html', {
