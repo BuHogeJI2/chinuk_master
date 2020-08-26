@@ -46,7 +46,7 @@ class Group(models.Model):
 
 class Client(models.Model):
     member_card = models.CharField(verbose_name='Членская карта', max_length=4, blank=True, null=True)
-    name = models.CharField(verbose_name='ФИО',max_length=50, blank=True, null=True)
+    name = models.CharField(verbose_name='ФИО',max_length=50)
     tel_number = models.CharField(verbose_name='Номер телефона', max_length=20, blank=True, null=True)
     info = models.TextField(verbose_name='Дополнительная информация', null=True, blank=True)
     training_type_choices = [

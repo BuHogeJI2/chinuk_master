@@ -1,0 +1,14 @@
+{% extends 'billing/base.html' %}
+
+{% block title %} ADD NEW CLIENT {% endblock %}
+
+{% block content %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{form.as_p}}
+        <button type="submit">Save</button>
+    </form>
+
+{% endblock %}

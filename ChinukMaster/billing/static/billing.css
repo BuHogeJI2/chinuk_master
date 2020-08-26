@@ -1,4 +1,7 @@
 
+#id_treners {
+    display: none;
+}
 
 .container {
     display: flex;

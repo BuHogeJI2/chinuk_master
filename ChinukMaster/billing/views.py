@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
+from .forms import ClientForm
 
 # Create your views here.
 
@@ -41,4 +42,14 @@ def detail_group(request, id):
     })
 
 def add_new_client(request):
-    return HttpResponse('HERE')
+
+    if request.method == 'POST':
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            client = form.save()
+            return redirect('detail_client', id=client.id)
+    else:
+        form = ClientForm()
+    return render(request, 'billing/new_client.html', {
+        'form' : form,
+    })
