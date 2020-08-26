@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from .models import *
-from .forms import ClientForm
+from .forms import *
 
 # Create your views here.
 
@@ -51,5 +51,29 @@ def add_new_client(request):
     else:
         form = ClientForm()
     return render(request, 'billing/new_client.html', {
+        'form' : form,
+    })
+
+def find_client(request):
+
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            searching_card = request.POST['search_field']
+            clients = Client.objects.filter(member_card__contains=f'{searching_card}')
+            if clients:
+                if len(clients) > 1:
+                    return HttpResponse('Find more than 2 cards!!!')
+                return redirect('detail_client', id=clients[0].id)
+                print(clients)
+            else:
+                result = 'none'
+                return render(request, 'billing/find_client.html', {
+                    'form' : form,
+                    'result': result,
+                })
+    else:
+        form = SearchForm()
+    return render(request, 'billing/find_client.html', {
         'form' : form,
     })
