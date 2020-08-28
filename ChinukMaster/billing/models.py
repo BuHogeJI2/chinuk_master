@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from datetime import date
 
 # Create your models here.
 class Trener(models.Model):
@@ -12,7 +13,7 @@ class Trener(models.Model):
         verbose_name_plural = 'Тренеры'
 
     def __str__(self):
-        return self.name
+        return self.name.split(' ')[0]
 
 
 class Group(models.Model):
@@ -46,7 +47,7 @@ class Group(models.Model):
 
 class Client(models.Model):
     member_card = models.CharField(verbose_name='Членская карта', max_length=4, blank=True, null=True)
-    name = models.CharField(verbose_name='ФИО',max_length=50)
+    name = models.CharField(verbose_name='ФИО', max_length=50, blank=True, null=True)
     tel_number = models.CharField(verbose_name='Номер телефона', max_length=20, blank=True, null=True)
     info = models.TextField(verbose_name='Дополнительная информация', null=True, blank=True)
     training_type_choices = [
@@ -60,7 +61,7 @@ class Client(models.Model):
 
     def __str__(self):
         return self.name
-            
+         
     class Meta:
         verbose_name = 'Клиент'
         verbose_name_plural = 'Клиенты'
@@ -101,11 +102,9 @@ class Payment(models.Model):
     date = models.DateField(verbose_name='Дата оплаты', default=timezone.now)
 
     def today(self):
-        return self.date == timezone.now()
+        return date.today()
 
     def __str__(self):
-        if self.trener:
-            return f'{self.date}: {self.amount} BYN'
         return f'{self.date}: {self.amount} BYN'
 
     class Meta:

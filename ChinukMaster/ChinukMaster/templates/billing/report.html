@@ -1,0 +1,41 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}REPORT{% endblock %}
+
+{% block content %}
+
+    <h2>{{today}}</h2>
+
+    <table>
+        <tr>
+            <th>Номер карты</th>
+            <th>ФИО</th>
+            <th>Группа</th>
+            <th>Сумма</th>
+        </tr>
+
+    {% for payment in payments %}
+
+        {% if payment.date == payment.today %}
+
+            <tr>
+                <td>{{payment.client.member_card}}</td>
+                <td>{{payment.client}}</td>
+                <td>{{payment.group.trener}}</td>
+                <td>{{payment.amount}}</td>
+            </tr>
+
+        {% endif %}
+
+    {% endfor %}
+    
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>{{result}}</td>
+    </tr>
+
+</table>
+
+{% endblock %}

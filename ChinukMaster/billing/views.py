@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.utils import timezone
 from .models import *
 from .forms import *
+from datetime import date, timedelta
 
 # Create your views here.
 
@@ -75,4 +77,20 @@ def find_client(request):
         form = SearchForm()
     return render(request, 'billing/find_client.html', {
         'form' : form,
+    })
+
+def total_payment(payments, date=date.today()):
+        result = 0
+        for payment in payments:
+            if payment.date >= date:
+                result += payment.amount
+
+        return result
+
+def get_report(request):
+
+    payments = Payment.objects.all()
+    return render(request, 'billing/report.html', {
+        'payments': payments,
+        'result' : total_payment(payments, date.today()),
     })
