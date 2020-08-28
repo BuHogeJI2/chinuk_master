@@ -6,7 +6,7 @@
 
     <h2>{{today}}</h2>
 
-    <table>
+    <table cellpadding='10' border="1px solid black">
         <tr>
             <th>Номер карты</th>
             <th>ФИО</th>
@@ -14,19 +14,38 @@
             <th>Сумма</th>
         </tr>
 
+        <tr>
+            <th colspan="4">Группы</th>
+        </tr>
+
     {% for payment in payments %}
-
-        {% if payment.date == payment.today %}
-
-            <tr>
-                <td>{{payment.client.member_card}}</td>
-                <td>{{payment.client}}</td>
-                <td>{{payment.group.trener}}</td>
-                <td>{{payment.amount}}</td>
-            </tr>
-
+        {% if payment.group %}
+            {% if payment.date == payment.today %}
+                <tr>
+                    <td>{{payment.client.member_card}}</td>
+                    <td>{{payment.client}}</td>
+                    <td>{{payment.group.trener}}</td>
+                    <td>{{payment.amount}}</td>
+                </tr>
+            {% endif %}
         {% endif %}
+    {% endfor %}
 
+    <tr>
+        <th colspan="4">Индивидуалы</th>
+    </tr>
+
+    {% for payment in payments %}    
+        {% if payment.trener %}
+            {% if payment.date == payment.today %}
+                <tr>
+                    <td>{{payment.client.member_card}}</td>
+                    <td>{{payment.client}}</td>
+                    <td>{{payment.trener}}</td>
+                    <td>{{payment.amount}}</td>
+                </tr>
+            {% endif %}
+        {%endif%}
     {% endfor %}
     
     <tr>
