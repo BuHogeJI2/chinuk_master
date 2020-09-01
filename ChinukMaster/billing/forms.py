@@ -10,3 +10,9 @@ class ClientForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search_field = forms.CharField()
+
+class PaymentForm(forms.ModelForm):
+
+    class Meta:
+        model = Payment
+        fields = '__all__'

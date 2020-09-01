@@ -94,3 +94,10 @@ def get_report(request):
         'payments': payments,
         'result' : total_payment(payments, date.today()),
     })
+
+
+def add_payment(request):
+    form = PaymentForm
+    return render(request, 'billing/add_payment.html', {
+        'form' : form,
+    })

@@ -1,7 +1,8 @@
 
-#id_treners {
+#id_treners, #id_trener, #id_trener_part {
     display: none;
 }
+
 
 .container {
     display: flex;

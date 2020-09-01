@@ -86,7 +86,7 @@ class Address(models.Model):
 
 class Payment(models.Model):
     client = models.ForeignKey(Client, on_delete=models.PROTECT, verbose_name='Плательщик')
-    amount = models.FloatField(verbose_name='Сумма', default=60)
+
     payment_to_choices = [
         ('G', 'В группу'),
         ('I', 'Индивидуально')
@@ -95,11 +95,14 @@ class Payment(models.Model):
         ('O', 'Разовый платеж'),
         ('M', 'Месячный взнос')
     ]
+
     payment_to = models.CharField(max_length=1, choices=payment_to_choices, default='G', verbose_name='Направление оплаты')
     payment_type = models.CharField(max_length=1, choices=payment_type_choices, default='M', verbose_name='Тип оплаты')
     trener = models.ForeignKey(Trener, on_delete=models.PROTECT, verbose_name='Тренер', blank=True, null=True)
     group = models.ForeignKey(Group, on_delete=models.PROTECT, verbose_name='Группа', blank=True, null=True)
     date = models.DateField(verbose_name='Дата оплаты', default=timezone.now)
+    amount = models.FloatField(verbose_name='Сумма', default=60)
+    trener_part = models.FloatField(verbose_name='Тренеру', null=True, blank=True)
 
     def today(self):
         return date.today()

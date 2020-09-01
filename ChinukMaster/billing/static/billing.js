@@ -18,8 +18,37 @@ var new_cient_fields = function() {
             groups.style.display = 'block';
         }
     });
+};
 
+var new_payment_fields = function() {
+
+    let payment_to = document.getElementById('id_payment_to');
+    let trener_part = document.getElementById('id_trener_part');
+    let trener = document.getElementById('id_trener');
+    let group = document.getElementById('id_group');
+
+    payment_to.addEventListener('change', () => {
+        if (payment_to.value == 'I') {
+            trener_part.style.display = 'block';
+            trener.style.display = 'block';
+            group.style.display = 'none';
+        } else {
+            trener_part.style.display = 'none';
+            trener.style.display = 'none';
+            group.style.display = 'block';
+        };
+    });
 
 };
 
-new_cient_fields();
+function MAIN() {
+    title = document.getElementById('title').innerHTML;
+    
+    if (title == 'ADD PAYMENT') {
+        new_payment_fields();
+    } else if (title == 'ADD NEW CLIENT') {
+        new_cient_fields();
+    }
+};
+
+MAIN();
