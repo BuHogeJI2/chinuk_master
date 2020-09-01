@@ -44,7 +44,6 @@ def detail_group(request, id):
     })
 
 def add_new_client(request):
-
     if request.method == 'POST':
         form = ClientForm(request.POST)
         if form.is_valid():
@@ -57,7 +56,6 @@ def add_new_client(request):
     })
 
 def find_client(request):
-
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
@@ -80,15 +78,14 @@ def find_client(request):
     })
 
 def total_payment(payments, date=date.today()):
-        result = 0
-        for payment in payments:
-            if payment.date >= date:
-                result += payment.amount
+    result = 0
+    for payment in payments:
+        if payment.date >= date:
+            result += payment.amount
 
-        return result
+    return result
 
 def get_report(request):
-
     payments = Payment.objects.all()
     return render(request, 'billing/report.html', {
         'payments': payments,
@@ -97,7 +94,13 @@ def get_report(request):
 
 
 def add_payment(request):
-    form = PaymentForm
+    if request.method == 'POST':
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            payment = form.save()
+            return HttpResponse('Succsess')
+    else:
+        form = PaymentForm
     return render(request, 'billing/add_payment.html', {
         'form' : form,
     })
