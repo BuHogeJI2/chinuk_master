@@ -104,7 +104,7 @@ def add_payment(request):
         form = PaymentForm(request.POST)
         if form.is_valid():
             payment = form.save()
-            return HttpResponse('Succsess')
+            return redirect('detail_payment', payment.id)
     else:
         form = PaymentForm
     return render(request, 'billing/add_payment.html', {
