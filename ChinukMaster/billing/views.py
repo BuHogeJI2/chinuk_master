@@ -43,6 +43,12 @@ def detail_group(request, id):
         'group_clients': group_clients,
     })
 
+def detail_payment(request, id):
+    payment = Payment.objects.get(id=id)
+    return render(request, 'billing/payment_detail.html', {
+        'payment' : payment,
+    })
+
 def add_new_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)

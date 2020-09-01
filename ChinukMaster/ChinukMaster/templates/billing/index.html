@@ -60,7 +60,7 @@
 
         {% for payment in payments %}
 
-            <p>{{payment}}</p>
+            <a href="{% url 'detail_payment' payment.id %}"><p>{{payment}}</p></a>
 
         {% endfor %}
 
