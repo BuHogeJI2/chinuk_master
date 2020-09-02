@@ -87,7 +87,10 @@ def total_payment(payments, date=date.today()):
     result = 0
     for payment in payments:
         if payment.date >= date:
-            result += payment.amount
+            if payment.payment_to == 'G':
+                result += payment.amount
+            else:
+                result += payment.total_amount()
 
     return result
 

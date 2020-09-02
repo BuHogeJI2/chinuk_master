@@ -8,14 +8,15 @@
 
     <table cellpadding='10' border="1px solid black">
         <tr>
-            <th>Номер карты</th>
-            <th>ФИО</th>
-            <th>Группа</th>
-            <th>Сумма</th>
+            <th colspan="5">Группы</th>
         </tr>
 
         <tr>
-            <th colspan="4">Группы</th>
+            <th>Номер карты</th>
+            <th>ФИО</th>
+            <th>Телефон</th>
+            <th>Группа</th>
+            <th>Сумма</th>
         </tr>
 
     {% for payment in payments %}
@@ -24,6 +25,7 @@
                 <tr>
                     <td>{{payment.client.member_card}}</td>
                     <td>{{payment.client}}</td>
+                    <td>{{payment.client.tel_number}}</td>
                     <td>{{payment.group.trener}}</td>
                     <td>{{payment.amount}}</td>
                 </tr>
@@ -32,7 +34,15 @@
     {% endfor %}
 
     <tr>
-        <th colspan="4">Индивидуалы</th>
+        <th colspan="5">Индивидуалы</th>
+    </tr>
+
+    <tr>
+        <th>Номер карты</th>
+        <th>ФИО</th>
+        <th>Тренер</th>
+        <th>Сумма</th>
+        <th>Приход</th>
     </tr>
 
     {% for payment in payments %}    
@@ -42,13 +52,15 @@
                     <td>{{payment.client.member_card}}</td>
                     <td>{{payment.client}}</td>
                     <td>{{payment.trener}}</td>
-                    <td>{{payment.amount}}</td>
+                    <td>{{payment.amount}} / {{payment.trener_part}}</td>
+                    <td>{{payment.total_amount}}</td>
                 </tr>
             {% endif %}
         {%endif%}
     {% endfor %}
     
     <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

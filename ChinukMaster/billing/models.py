@@ -102,7 +102,7 @@ class Payment(models.Model):
     group = models.ForeignKey(Group, on_delete=models.PROTECT, verbose_name='Группа', blank=True, null=True)
     date = models.DateField(verbose_name='Дата оплаты', default=timezone.now)
     amount = models.FloatField(verbose_name='Сумма', default=60)
-    trener_part = models.FloatField(verbose_name='Тренеру', null=True, blank=True)
+    trener_part = models.FloatField(verbose_name='Тренеру', default=0)
 
     def today(self):
         return date.today()
