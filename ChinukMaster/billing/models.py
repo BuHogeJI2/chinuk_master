@@ -107,6 +107,9 @@ class Payment(models.Model):
     def today(self):
         return date.today()
 
+    def total_amount(self):
+        return self.amount - self.trener_part
+
     def __str__(self):
         return f'{self.date}: {self.amount} BYN'
 

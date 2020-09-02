@@ -45,7 +45,7 @@ def detail_group(request, id):
 
 def detail_payment(request, id):
     payment = Payment.objects.get(id=id)
-    return render(request, 'billing/payment_detail.html', {
+    return render(request, 'billing/detail_payment.html', {
         'payment' : payment,
     })
 
