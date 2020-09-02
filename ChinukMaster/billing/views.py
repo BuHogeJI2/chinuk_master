@@ -9,18 +9,36 @@ from datetime import date, timedelta
 
 
 def index(request):
-    clinets = Client.objects.all()
-    treners = Trener.objects.all()
-    addresses = Address.objects.all()
-    groups = Group.objects.all()
-    payments = Payment.objects.all()
+    return render(request, 'billing/index.html', {})
 
-    return render(request, 'billing/index.html', {
-        'clients': clinets,
-        'treners': treners,
-        'addresses': addresses,
-        'groups': groups,
-        'payments':payments,
+def show_clients(request):
+    clients = Client.objects.all()
+    return render(request, 'billing/show/clients.html', {
+        'clients' : clients,
+    })
+
+def show_treners(request):
+    treners = Trener.objects.all()
+    return render(request, 'billing/show/treners.html', {
+        'treners' : treners,
+    })
+
+def show_groups(request):
+    groups = Group.objects.all()
+    return render(request, 'billing/show/groups.html', {
+        'groups' : groups,
+    })
+
+def show_addresses(request):
+    addresses = Address.objects.all()
+    return render(request, 'billing/show/addresses.html', {
+        'addresses' : addresses,
+    })
+
+def show_payments(request):
+    payments = Payment.objects.all()
+    return render(request, 'billing/show/payments.html', {
+        'payments' : payments,
     })
 
 def detail_client(request, id):

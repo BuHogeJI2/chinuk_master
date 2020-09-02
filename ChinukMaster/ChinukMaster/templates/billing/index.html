@@ -1,83 +1,25 @@
 {% extends 'billing/base.html' %}
 
-{% block title %}INDEX{% endblock %}
+{% block title %}ChinukMaster{% endblock %}
 
 {% block content %}
 
-<div class="container info-list">
-
-    <div class="div-clients content">
-
-        <h2>Клиенты</h2>
-
-        {% for client in clients %}
-
-            <a href="{% url 'detail_client' client.id %}"><p>{{client}}</p></a>
-
-        {% endfor %}
-
+    <div class="container-xxl d-flex flex-column justify-content-center align-items-center">
+        <h2>Добро пожаловать</h2>
+        <h3>в систему контроля и учета</h3>
+        <h1>ChinukMaster</h1>
     </div>
 
-    <div class="div-treners content">
 
-        <h2>Тренеры</h2>
 
-        {% for trener in treners %}
-
-            <p>{{trener}}</p>
-
-        {% endfor %}
-
-    </div>
-
-    <div class="div-groups content">
-
-        <h2>Группы</h2>
-
-        {% for group in groups %}
-
-            <a href="{% url 'detail_group' group.id %}"><p>{{group}}</p></a>
-
-        {% endfor %}
-
-    </div>
-
-    <div class="div-addresses content">
-
-        <h2>Залы</h2>
-
-        {% for address in addresses %}
-
-            <p>{{address}}</p>
-
-        {% endfor %}
-
-    </div>
-
-    <div class="div-payments content">
-
-        <h2>Оплаты</h2>
-
-        {% for payment in payments %}
-
-            <a href="{% url 'detail_payment' payment.id %}"><p>{{payment}}</p></a>
-
-        {% endfor %}
-
-    </div>
-
-</div>
-
-<hr>
-
-<div class="actions">
+<!-- <div class="actions">
 
     <div><a href="{% url 'new_client' %}" class="add_new_client">add new client</a></div>
     <div><a href="{% url 'find_client' %}">find client</a></div>
     <div><a href="{% url 'get_report' %}">report</a></div>
     <div><a href="{% url 'add_payment' %}">add payment</a></div>
 
-</div>
+</div> -->
 
 {% endblock %}
 

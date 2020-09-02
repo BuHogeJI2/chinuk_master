@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'billing.css' %}">
-    <title id="title">{% block title %} BASE {% endblock %}</title>
+    <title id="title">{% block title %}BASE{% endblock %}</title>
 </head>
 <body>
 
@@ -27,7 +27,7 @@
                   Клиенты
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Просмотр</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_clients' %}">Просмотр</a></li>
                   <li><a class="dropdown-item" href="#">Добавить нового</a></li>
                 </ul>
               </li>
@@ -36,7 +36,7 @@
                   Тренеры
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Просмотр</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_treners' %}">Просмотр</a></li>
                   <li><a class="dropdown-item" href="#">Добавить нового</a></li>
                 </ul>
               </li>
@@ -45,7 +45,7 @@
                   Группы
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Просмотр</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_groups' %}">Просмотр</a></li>
                   <li><a class="dropdown-item" href="#">Добавить новую</a></li>
                 </ul>
               </li>
@@ -54,7 +54,7 @@
                   Залы
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Просмотр</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_addresses' %}">Просмотр</a></li>
                   <li><a class="dropdown-item" href="#">Добавить новый</a></li>
                 </ul>
               </li>
@@ -63,12 +63,13 @@
                   Оплаты
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="#">Просмотр</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_payments' %}">Просмотр</a></li>
                   <li><a class="dropdown-item" href="#">Добавить новую</a></li>
                 </ul>
               </li>
             </ul>
-            <form class="d-flex">
+            <form class="d-flex" method="POST">
+              {% csrf_token %}
               <input class="form-control mr-2" type="search" placeholder="Введите данные" aria-label="Search">
               <button class="btn btn-outline-success" type="submit">Поиск</button>
             </form>
@@ -76,12 +77,12 @@
         </div>
     </nav>
 
-    <main>
+    <main class="mt-5 mb-5">
         <div class="container-xxl">
             <div class="row">
                 <div class="col-xxl">
-                <!-- {% block content %}
-                {% endblock %} -->
+                    {% block content %}
+                    {% endblock %}
                 </div>
             </div>
         </div>
