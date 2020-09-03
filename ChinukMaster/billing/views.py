@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from django.utils import timezone
 from .models import *
@@ -10,6 +11,16 @@ from datetime import date, timedelta
 
 def index(request):
     return render(request, 'billing/index.html', {})
+
+def search_result(request):
+    if request.method == 'POST':
+        search_request = request.POST['search_request']
+        clients = Client.objects.filter(member_card__icontains=f'{search_request}')
+        if clients:
+            if len(clients) > 1:
+               return HttpResponse('Find more than 2 cards!!!') 
+            return redirect('detail_client', id=clients[0].id)
+        raise Http404('Нет такой карточки!')
 
 def show_clients(request):
     clients = Client.objects.all()
@@ -37,8 +48,12 @@ def show_addresses(request):
 
 def show_payments(request):
     payments = Payment.objects.all()
+    paginator = Paginator(payments, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(request, 'billing/show/payments.html', {
         'payments' : payments,
+        'page_obj' : page_obj,
     })
 
 def detail_client(request, id):
@@ -46,7 +61,7 @@ def detail_client(request, id):
     groups = cli.groups.all()
     treners = cli.treners.all()
     payments = cli.payment_set.all()
-    return render(request, 'billing/detail_client.html', {
+    return render(request, 'billing/detail/client.html', {
         'client': cli,
         'groups': groups,
         'treners': treners,
@@ -56,14 +71,14 @@ def detail_client(request, id):
 def detail_group(request, id):
     group = Group.objects.get(id=id)
     group_clients = group.client_set.all()
-    return render(request, 'billing/detail_group.html', {
+    return render(request, 'billing/detail/group.html', {
         'group': group,
         'group_clients': group_clients,
     })
 
 def detail_payment(request, id):
     payment = Payment.objects.get(id=id)
-    return render(request, 'billing/detail_payment.html', {
+    return render(request, 'billing/detail/payment.html', {
         'payment' : payment,
     })
 
@@ -72,23 +87,12 @@ def add_new_client(request):
         form = ClientForm(request.POST)
         if form.is_valid():
             client = form.save()
-            return redirect('detail_client', id=client.id)
+            return redirect('client', id=client.id)
     else:
         form = ClientForm()
     return render(request, 'billing/new_client.html', {
         'form' : form,
     })
-
-def search_result(request):
-    if request.method == 'POST':
-        search_request = request.POST['search_request']
-        clients = Client.objects.filter(member_card__icontains=f'{search_request}')
-        if clients:
-            if len(clients) > 1:
-               return HttpResponse('Find more than 2 cards!!!') 
-            return redirect('detail_client', id=clients[0].id)
-        raise Http404('Нет такой карточки!')
-
 
 def total_payment(payments, date=date.today()):
     result = 0
@@ -114,7 +118,7 @@ def add_payment(request):
         form = PaymentForm(request.POST)
         if form.is_valid():
             payment = form.save()
-            return redirect('detail_payment', payment.id)
+            return redirect('payment', payment.id)
     else:
         form = PaymentForm
     return render(request, 'billing/add_payment.html', {
