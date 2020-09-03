@@ -1,0 +1,32 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}PAYMENT{% endblock %}
+
+{% block content %} 
+
+    <p>Дата оплаты: {{payment.date}}</p>
+    <p>Клиент: <a href="{% url 'client' payment.client.id %}">{{payment.client}}</a></p>
+    <p>Тип оплаты: 
+        {% if payment.payment_type == 'O' %}
+            Разовый
+        {% else %}
+            За месяц
+        {% endif %}
+    </p>
+    <p>Направление оплаты: 
+        {% if payment.payment_to == 'G' %}
+            В группу
+            <p>
+                Группа: {{payment.group}}
+            </p>
+        {% else %}
+            Индивидуально
+            <p>
+                Тренер: {{payment.trener}}
+            </p>
+        {% endif %}
+    </p>
+    <p>Сумма: {{payment.amount}} / {{payment.trener_part}}</p>
+    <p>Приход: {{payment.total_amount}}</p>
+
+{% endblock %}

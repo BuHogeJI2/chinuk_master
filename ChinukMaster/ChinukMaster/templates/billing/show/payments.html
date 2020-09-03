@@ -4,16 +4,9 @@
 
 {% block content %}
 
-    <div class="div-payments content">
+    {% for payment in page_obj %}
+        {{payment}}<br>
+    {% endfor %}
 
-        <h2>Оплаты</h2>
-
-        {% for payment in payments %}
-
-            <a href="{% url 'detail_payment' payment.id %}"><p>{{payment}}</p></a>
-
-        {% endfor %}
-
-    </div>
 
 {% endblock %}
