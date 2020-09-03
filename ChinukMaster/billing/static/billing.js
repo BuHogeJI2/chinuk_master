@@ -1,5 +1,3 @@
-
-
 var new_cient_fields = function() {
 
     let treners = document.getElementById('id_treners');

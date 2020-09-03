@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.utils import timezone
 from .models import *
 from .forms import *
@@ -79,27 +79,16 @@ def add_new_client(request):
         'form' : form,
     })
 
-def find_client(request):
+def search_result(request):
     if request.method == 'POST':
-        form = SearchForm(request.POST)
-        if form.is_valid():
-            searching_card = request.POST['search_field']
-            clients = Client.objects.filter(member_card__contains=f'{searching_card}')
-            if clients:
-                if len(clients) > 1:
-                    return HttpResponse('Find more than 2 cards!!!')
-                return redirect('detail_client', id=clients[0].id)
-            else:
-                result = 'none'
-                return render(request, 'billing/find_client.html', {
-                    'form' : form,
-                    'result': result,
-                })
-    else:
-        form = SearchForm()
-    return render(request, 'billing/find_client.html', {
-        'form' : form,
-    })
+        search_request = request.POST['search_request']
+        clients = Client.objects.filter(member_card__icontains=f'{search_request}')
+        if clients:
+            if len(clients) > 1:
+               return HttpResponse('Find more than 2 cards!!!') 
+            return redirect('detail_client', id=clients[0].id)
+        raise Http404('Нет такой карточки!')
+
 
 def total_payment(payments, date=date.today()):
     result = 0

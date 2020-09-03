@@ -68,9 +68,9 @@
                 </ul>
               </li>
             </ul>
-            <form class="d-flex" method="POST">
+            <form class="d-flex" method="POST" action="{% url 'search_result' %}">
               {% csrf_token %}
-              <input class="form-control mr-2" type="search" placeholder="Введите данные" aria-label="Search">
+              <input class="form-control mr-2" type="search" placeholder="Введите данные" aria-label="Search" name="search_request"> 
               <button class="btn btn-outline-success" type="submit">Поиск</button>
             </form>
           </div>
