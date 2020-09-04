@@ -7,6 +7,7 @@ class Trener(models.Model):
     name = models.CharField(max_length=50, verbose_name = 'Имя')
     tel_number = models.CharField(max_length=20, verbose_name = 'Номер телефона')
     info = models.TextField(blank=True, null=False, verbose_name = 'Дополнительная информация')
+    photo = models.ImageField(verbose_name='Фото', upload_to='billing/media/treners', height_field=None, width_field=None, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Тренер'

@@ -14,6 +14,7 @@ urlpatterns = [
     path('client/<int:id>', views.detail_client, name='client'),
     path('group/<int:id>', views.detail_group, name='group'),
     path('payment/<int:id>', views.detail_payment, name='payment'),
+    path('trener/<int:id>', views.detail_trener, name='trener'),
 
     path('client/new', views.add_new_client, name='new_client'),
     path('report', views.get_report, name='get_report'),

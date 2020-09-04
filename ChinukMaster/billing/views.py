@@ -82,6 +82,12 @@ def detail_payment(request, id):
         'payment' : payment,
     })
 
+def detail_trener(request, id):
+    trener = Trener.objects.get(id=id)
+    return render(request, 'billing/detail/trener.html', {
+        'trener' : trener,
+    })
+
 def add_new_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)

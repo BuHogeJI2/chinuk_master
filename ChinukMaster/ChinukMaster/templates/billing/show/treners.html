@@ -9,13 +9,15 @@
         {% for trener in treners %}
 
             <div class="col card m-3" style="width: 18rem;">
-                <img src="..." class="card-img-top" alt="...">
+                {% if trener.photo %}
+                    <img src="{{trener.photo.url}}" class="card-img-top" alt="...">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{trener.name}}</h5>
                     {% if trener.info %}
                         <p class="card-text">{{trener.info}}</p>
                     {% endif %}
-                    <a href="#" class="btn btn-primary">Перейти</a>
+                    <a href="{% url 'trener' trener.id %}" class="btn btn-primary">Перейти</a>
                 </div>
             </div>
 
