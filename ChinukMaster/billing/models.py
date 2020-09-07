@@ -34,8 +34,8 @@ class Group(models.Model):
     gr_type = models.CharField(verbose_name='Возраст', max_length=1, choices=gr_type_choices, default='A')
     sport_type = models.CharField(verbose_name='Тип', max_length=1, choices = sport_type_choices, default='T')
     time = models.TimeField(verbose_name='Время')
-    trener = models.ForeignKey('Trener', verbose_name='Тренер', on_delete=models.PROTECT, null=True, blank=True)
-    address = models.ForeignKey('Address', verbose_name='Зал', on_delete=models.PROTECT, null=True, blank=True)
+    trener = models.ForeignKey('Trener', verbose_name='Тренер', on_delete=models.SET_NULL, null=True, blank=True)
+    address = models.ForeignKey('Address', verbose_name='Зал', on_delete=models.SET_NULL, null=True, blank=True)
 
     class Meta:
         verbose_name = 'Группа'
@@ -43,7 +43,10 @@ class Group(models.Model):
 
     def __str__(self):
 
-        name = self.trener.name.split()[0]
+        if self.trener:
+            name = self.trener.name.split()[0]
+        else:
+            name = 'Без тренера'
         return ' '.join([name, str(self.time)])
 
 class Client(models.Model):
@@ -99,8 +102,8 @@ class Payment(models.Model):
 
     payment_to = models.CharField(max_length=1, choices=payment_to_choices, default='G', verbose_name='Направление оплаты')
     payment_type = models.CharField(max_length=1, choices=payment_type_choices, default='M', verbose_name='Тип оплаты')
-    trener = models.ForeignKey(Trener, on_delete=models.PROTECT, verbose_name='Тренер', blank=True, null=True)
-    group = models.ForeignKey(Group, on_delete=models.PROTECT, verbose_name='Группа', blank=True, null=True)
+    trener = models.ForeignKey(Trener, on_delete=models.SET_NULL, verbose_name='Тренер', blank=True, null=True)
+    group = models.ForeignKey(Group, on_delete=models.SET_NULL, verbose_name='Группа', blank=True, null=True)
     date = models.DateField(verbose_name='Дата оплаты', default=timezone.now)
     amount = models.FloatField(verbose_name='Сумма', default=60)
     trener_part = models.FloatField(verbose_name='Тренеру', default=0)

@@ -88,6 +88,11 @@ def detail_trener(request, id):
         'trener' : trener,
     })
 
+def delete_trener(request, id):
+    trener = Trener.objects.get(id=id)
+    trener.delete()
+    return redirect('show_treners')
+
 def add_new_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)

@@ -4,6 +4,42 @@
 
 {% block content %}
 
-
+    <div class="container-xxl">
+        <div class="row">
+            <div class="col">
+                {% if trener.photo %}
+                    <img src="{{trener.photo.url}}" alt="{{trener.name}}" class="rounded">
+                {% endif %}
+            </div>
+            <div class="col">
+                <div class="row h-75 border">
+                    <div class="col">
+                        <h1>{{trener.name}}</h1>
+                        <p>{{trener.tel_number}}</p>
+                        {% if trener.info %}
+                            <p>Доп. информация: {{trener.info}}</p>
+                        {% endif %}
+                        <p>Группы: </p>
+                        {% for group in trener.group_set.all %}
+                            <a href="{% url 'group' group.id %}"><p>{{group}}</p></a>
+                        {% endfor %}
+                        <p>Индивидуалы: </p>
+                        {% for individual in trener.client_set.all %}
+                            <a href="{% url 'client' individual.id %}"><p>{{individual}}</p></a>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="row h-25 border">
+                    <div class="col">
+                        <div class="row">
+                            <div class="col p-3">
+                                <a href="{% url 'delete_trener' trener.id %}" class="btn btn-danger">Удалить</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 {% endblock %}
