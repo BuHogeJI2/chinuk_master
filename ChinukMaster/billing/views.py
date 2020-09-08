@@ -19,7 +19,7 @@ def search_result(request):
         if clients:
             if len(clients) > 1:
                return HttpResponse('Find more than 2 cards!!!') 
-            return redirect('detail_client', id=clients[0].id)
+            return redirect('detail_object', obj='client', id=clients[0].id)
         raise Http404('Нет такой карточки!')
 
 
@@ -59,11 +59,6 @@ def detail_object(request, obj, id):
         f'{obj}' : inst,
     })
 
-def delete_trener(request, id):
-    trener = Trener.objects.get(id=id)
-    trener.delete()
-    return redirect('show_treners')
-
 def add_new_object(request, obj):
 
     obj_values = {
@@ -87,6 +82,22 @@ def add_new_object(request, obj):
             'form' : form,
         })
 
+def delete_object(request, obj, id):
+
+    obj_values = {
+        'trener' : Trener, 
+        'client' : Client,
+        'group'  : Group,
+        'payment': Payment,
+        'address': Address,
+    }
+
+    inst = obj_values[obj].objects.get(id=id)
+    inst.delete()
+
+    show_obj_link = f'{obj}s' if obj != 'address' else f'{obj}es'
+
+    return redirect('show_objects', show_obj_link)
 
 def total_payment(payments, date=date.today()):
     result = 0
