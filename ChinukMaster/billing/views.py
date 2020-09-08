@@ -77,7 +77,7 @@ def add_new_object(request, obj):
             obj = form.save()
             return redirect('index')
     else:
-        return render(request, 'billing/add/new_object.html', {
+        return render(request, 'billing/new_object.html', {
             'obj' : obj,
             'form' : form,
         })
@@ -115,17 +115,4 @@ def get_report(request):
     return render(request, 'billing/report.html', {
         'payments': payments,
         'result' : total_payment(payments, date.today()),
-    })
-
-
-def add_payment(request):
-    if request.method == 'POST':
-        form = PaymentForm(request.POST)
-        if form.is_valid():
-            payment = form.save()
-            return redirect('payment', payment.id)
-    else:
-        form = PaymentForm
-    return render(request, 'billing/add_payment.html', {
-        'form' : form,
     })
