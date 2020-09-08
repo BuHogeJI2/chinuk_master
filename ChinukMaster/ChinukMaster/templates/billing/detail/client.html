@@ -28,7 +28,7 @@
 
         {% if client.cl_type == 'I' or client.cl_type == 'B' %}
             <p>Тренеры:</p>
-            {% for trener in treners %}
+            {% for trener in client.treners.all %}
                 <p> - {{trener}}</p>
             {% endfor %}
 
@@ -38,11 +38,11 @@
 
     <div class="payment-history">
 
-        {% if payments %}
+        {% if client.payment_set.all %}
 
             <p>История оплат</p>
 
-            {% for payment in payments %}
+            {% for payment in client.payment_set.all %}
                 <p> - {{payment}}</p>
             {% endfor %}
 

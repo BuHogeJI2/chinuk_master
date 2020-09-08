@@ -17,7 +17,7 @@
                     {% if trener.info %}
                         <p class="card-text">{{trener.info}}</p>
                     {% endif %}
-                    <a href="{% url 'trener' trener.id %}" class="btn btn-primary">Перейти</a>
+                    <a href="{% url 'detail_object' obj='trener' id=trener.id %}" class="btn btn-primary">Перейти</a>
                 </div>
             </div>
 

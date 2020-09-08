@@ -56,36 +56,20 @@ def show_payments(request):
         'page_obj' : page_obj,
     })
 
-def detail_client(request, id):
-    cli = Client.objects.get(id=id)
-    groups = cli.groups.all()
-    treners = cli.treners.all()
-    payments = cli.payment_set.all()
-    return render(request, 'billing/detail/client.html', {
-        'client': cli,
-        'groups': groups,
-        'treners': treners,
-        'payments': payments,
-    })
 
-def detail_group(request, id):
-    group = Group.objects.get(id=id)
-    group_clients = group.client_set.all()
-    return render(request, 'billing/detail/group.html', {
-        'group': group,
-        'group_clients': group_clients,
-    })
+def detail_object(request, obj, id):
 
-def detail_payment(request, id):
-    payment = Payment.objects.get(id=id)
-    return render(request, 'billing/detail/payment.html', {
-        'payment' : payment,
-    })
+    obj_values = {
+        'trener' : Trener, 
+        'client' : Client,
+        'group'  : Group,
+        'payment': Payment,
+        'address': Address,
+    }
 
-def detail_trener(request, id):
-    trener = Trener.objects.get(id=id)
-    return render(request, 'billing/detail/trener.html', {
-        'trener' : trener,
+    inst = obj_values[obj].objects.get(id=id)
+    return render(request, f'billing/detail/{obj}.html', {
+        f'{obj}' : inst,
     })
 
 def delete_trener(request, id):
@@ -94,7 +78,7 @@ def delete_trener(request, id):
     return redirect('show_treners')
 
 def add_new_object(request, obj):
-    
+
     obj_values = {
         'trener' : TrenerForm, 
         'client' : ClientForm,
@@ -116,18 +100,6 @@ def add_new_object(request, obj):
             'form' : form,
         })
 
-
-def add_new_client(request):
-    if request.method == 'POST':
-        form = ClientForm(request.POST)
-        if form.is_valid():
-            client = form.save()
-            return redirect('client', id=client.id)
-    else:
-        form = ClientForm()
-    return render(request, 'billing/new_client.html', {
-        'form' : form,
-    })
 
 def total_payment(payments, date=date.today()):
     result = 0

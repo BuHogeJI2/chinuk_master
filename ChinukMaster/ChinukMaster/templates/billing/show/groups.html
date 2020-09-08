@@ -10,7 +10,7 @@
 
         {% for group in groups %}
 
-            <a href="{% url 'group' group.id %}"><p>{{group}}</p></a>
+            <a href="{% url 'detail_object' obj='group' id=group.id %}"><p>{{group}}</p></a>
 
         {% endfor %}
 

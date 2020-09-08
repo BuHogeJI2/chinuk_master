@@ -11,14 +11,9 @@ urlpatterns = [
     path('addresses', views.show_addresses, name='show_addresses'),
     path('payments', views.show_payments, name='show_payments'),
 
-    path('client/<int:id>', views.detail_client, name='client'),
-    path('group/<int:id>', views.detail_group, name='group'),
-    path('payment/<int:id>', views.detail_payment, name='payment'),
-    path('trener/<int:id>', views.detail_trener, name='trener'),
+    path('<slug:obj>/<int:id>', views.detail_object, name='detail_object'),
 
-    
     path('new/<slug:obj>', views.add_new_object, name='add_new'),
     path('delete/<int:id>', views.delete_trener, name='delete_trener'),
     path('report', views.get_report, name='get_report'),
-    path('payment/add', views.add_payment, name='add_payment'),
 ]

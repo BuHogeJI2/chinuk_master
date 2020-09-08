@@ -21,11 +21,11 @@
                         {% endif %}
                         <p>Группы: </p>
                         {% for group in trener.group_set.all %}
-                            <a href="{% url 'group' group.id %}"><p>{{group}}</p></a>
+                            <a href="{% url 'detail_object' obj='group' id=group.id %}"><p>{{group}}</p></a>
                         {% endfor %}
                         <p>Индивидуалы: </p>
                         {% for individual in trener.client_set.all %}
-                            <a href="{% url 'client' individual.id %}"><p>{{individual}}</p></a>
+                            <a href="{% url 'detail_object' obj='client' id=individual.id %}"><p>{{individual}}</p></a>
                         {% endfor %}
                     </div>
                 </div>

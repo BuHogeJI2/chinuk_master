@@ -10,7 +10,7 @@
 
         {% for client in clients %}
 
-            <a href="{% url 'client' client.id %}"><p>{{client}}</p></a>
+            <a href="{% url 'detail_object' obj='client' id=client.id %}"><p>{{client}}</p></a>
 
         {% endfor %}
 
