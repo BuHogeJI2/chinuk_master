@@ -1,0 +1,9 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}Search result{% endblock %}
+
+{% block content %}
+    {% for obj, obj_link in obj_pairs.items %}
+        <a href="{% url 'detail_object' obj=obj_link id=obj.id %}"><p>{{obj}}</p></a>
+    {% endfor %}
+{% endblock %}

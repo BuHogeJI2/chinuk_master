@@ -2,7 +2,6 @@ from django.db import models
 from django.utils import timezone
 from datetime import date
 
-# Create your models here.
 class Trener(models.Model):
     name = models.CharField(max_length=50, verbose_name = 'Имя')
     tel_number = models.CharField(max_length=20, verbose_name = 'Номер телефона')
