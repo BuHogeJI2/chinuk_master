@@ -93,6 +93,30 @@ def delete_trener(request, id):
     trener.delete()
     return redirect('show_treners')
 
+def add_new_object(request, obj):
+    
+    obj_values = {
+        'trener' : TrenerForm, 
+        'client' : ClientForm,
+        'group'  : GroupForm,
+        'payment': PaymentForm,
+        'address': AddressForm,
+    }
+
+    form = obj_values[obj]
+
+    if request.method == 'POST':
+        form = form(request.POST)
+        if form.is_valid():
+            obj = form.save()
+            return redirect('index')
+    else:
+        return render(request, 'billing/add/new_object.html', {
+            'obj' : obj,
+            'form' : form,
+        })
+
+
 def add_new_client(request):
     if request.method == 'POST':
         form = ClientForm(request.POST)

@@ -28,7 +28,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'show_clients' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="#">Добавить нового</a></li>
+                  <li><a class="dropdown-item" href="{% url 'add_new' obj='client' %}">Добавить нового</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -37,7 +37,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'show_treners' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="#">Добавить нового</a></li>
+                  <li><a class="dropdown-item" href="{% url 'add_new' obj='trener' %}">Добавить нового</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -46,7 +46,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'show_groups' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="#">Добавить новую</a></li>
+                  <li><a class="dropdown-item" href="{% url 'add_new' obj='group' %}">Добавить новую</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -55,7 +55,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'show_addresses' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="#">Добавить новый</a></li>
+                  <li><a class="dropdown-item" href="{% url 'add_new' obj='address' %}">Добавить новый</a></li>
                 </ul>
               </li>
               <li class="nav-item dropdown">
@@ -64,7 +64,7 @@
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                   <li><a class="dropdown-item" href="{% url 'show_payments' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="#">Добавить новую</a></li>
+                  <li><a class="dropdown-item" href="{% url 'add_new' obj='payment' %}">Добавить новую</a></li>
                 </ul>
               </li>
             </ul>

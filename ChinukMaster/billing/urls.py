@@ -16,7 +16,8 @@ urlpatterns = [
     path('payment/<int:id>', views.detail_payment, name='payment'),
     path('trener/<int:id>', views.detail_trener, name='trener'),
 
-    path('client/new', views.add_new_client, name='new_client'),
+    
+    path('new/<slug:obj>', views.add_new_object, name='add_new'),
     path('delete/<int:id>', views.delete_trener, name='delete_trener'),
     path('report', views.get_report, name='get_report'),
     path('payment/add', views.add_payment, name='add_payment'),

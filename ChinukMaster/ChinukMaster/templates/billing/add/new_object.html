@@ -1,0 +1,24 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}New {{obj}}{% endblock %}
+
+{% block content %}
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        {% for field in form %}
+            <div class="row mb-3">
+                <label for="{{field.id_for_label}}" class="col-form-label col-sm-2">{{field.label}}</label>
+                <div class="col-sm-10">
+                    {{field}}
+                </div>
+            </div>
+
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Сохранить</button>
+
+    </form>
+
+{% endblock %}
