@@ -22,40 +22,27 @@ def search_result(request):
             return redirect('detail_client', id=clients[0].id)
         raise Http404('Нет такой карточки!')
 
-def show_clients(request):
-    clients = Client.objects.all()
-    return render(request, 'billing/show/clients.html', {
-        'clients' : clients,
-    })
 
-def show_treners(request):
-    treners = Trener.objects.all()
-    return render(request, 'billing/show/treners.html', {
-        'treners' : treners,
-    })
+def show_objects(request, obj):
 
-def show_groups(request):
-    groups = Group.objects.all()
-    return render(request, 'billing/show/groups.html', {
-        'groups' : groups,
-    })
+    obj_values = {
+        'treners' : Trener, 
+        'clients' : Client,
+        'groups'  : Group,
+        'payments': Payment,
+        'addresses': Address,
+    }
 
-def show_addresses(request):
-    addresses = Address.objects.all()
-    return render(request, 'billing/show/addresses.html', {
-        'addresses' : addresses,
-    })
+    inst = obj_values[obj].objects.all()
 
-def show_payments(request):
-    payments = Payment.objects.all()
-    paginator = Paginator(payments, 10)
+    paginator = Paginator(inst, 10)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    return render(request, 'billing/show/payments.html', {
-        'payments' : payments,
+
+    return render(request, f'billing/show/{obj}.html', {
+        f'{obj}' : inst,
         'page_obj' : page_obj,
     })
-
 
 def detail_object(request, obj, id):
 
