@@ -95,7 +95,7 @@ def show_objects(request, obj):
     show_obj_link = f'{obj}s' if obj != 'address' else f'{obj}es'
 
     return render(request, f'billing/show/{show_obj_link}.html', {
-        f'{obj}' : inst,
+        f'{show_obj_link}' : inst,
         'page_obj' : page_obj,
     })
 
