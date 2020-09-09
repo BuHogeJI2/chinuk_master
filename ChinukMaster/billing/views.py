@@ -16,6 +16,14 @@ obj_values = {
         'address': Address,
     }
 
+obj_forms = {
+    'trener' : TrenerForm, 
+    'client' : ClientForm,
+    'group'  : GroupForm,
+    'payment': PaymentForm,
+    'address': AddressForm,
+}
+
 # Functions-supporters
 
 def get_obj_link(obj):
@@ -88,7 +96,7 @@ def show_objects(request, obj):
 
     inst = obj_values[obj].objects.all()
 
-    paginator = Paginator(inst, 10)
+    paginator = Paginator(inst, 15)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -108,13 +116,13 @@ def detail_object(request, obj, id):
 
 def add_new_object(request, obj):
 
-    form = obj_values[obj]
+    form = obj_forms[obj]
 
     if request.method == 'POST':
         form = form(request.POST)
         if form.is_valid():
             obj = form.save()
-            return redirect('index')
+            return HttpResponse(obj)
     else:
         return render(request, 'billing/new_object.html', {
             'obj' : obj,

@@ -1,17 +1,59 @@
 {% extends 'billing/base.html' %}
 
-{% block title %}Clients{% endblock %}
+{% block title %}Клиенты{% endblock %}
 
 {% block content %}
 
-    <div class="div-clients content">
-
-        <h2>Клиенты</h2>
-
-        {% for client in clients %}
-
-            <a href="{% url 'detail_object' obj='client' id=client.id %}"><p>{{client}}</p></a>
-
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Членская карта</th>
+                <th scope="col">ФИО</th>
+                <th scope="col">Номер телефона</th>
+                <th scope="col">Тип клиента</th>
+                <th scope="col">Группа</th>
+                <th scope="col">Тренер</th>
+                <th scope="col">Последняя оплата</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for obj in page_obj %}
+            <tr>
+                <th scope="row">{{obj.id}}</th>
+                <td>
+                    {% if obj.member_card %}
+                        {{obj.member_card}}
+                    {% endif %}
+                </td>
+                <td><a href="{% url 'detail_object' obj='client' id=obj.id %}">{{obj.name}}</a></td>
+                <td>{{obj.tel_number}}</td>
+                <td>
+                    {% if obj.cl_type == 'G' %} Групповые
+                    {% elif obj.cl_type == 'I' %} Индивидуал
+                    {% else %} Смешанный
+                    {% endif %}
+                </td>
+                <td>
+                    {% for group in obj.groups.all %}
+                        <a href="{% url 'detail_object' obj='group' id=group.id %}">{{group.trener}}<br></a>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for trener in obj.treners.all %}
+                        <a href="{% url 'detail_object' obj='trener' id=trener.id %}">{{trener}}<br></a>
+                    {% endfor %}
+                </td>
+                <td>
+                    {% if obj.last_payment %}
+                        <a href="{% url 'detail_object' obj='payment' id=obj.last_payment.id %}">{{obj.last_payment.date}} | {{obj.last_payment.amount}}</a>
+                    {% endif %}
+                </td>
+            </tr>
         {% endfor %}
+        </tbody>
+    </table>
+
+    
 
 {% endblock %}

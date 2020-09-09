@@ -1,19 +1,95 @@
 {% extends 'billing/base.html' %}
 
-{% block title %}Clients{% endblock %}
+{% block title %}Группы{% endblock %}
 
 {% block content %}
 
-    <div class="div-groups content">
-
-        <h2>Группы</h2>
-
-        {% for group in groups %}
-
-            <a href="{% url 'detail_object' obj='group' id=group.id %}"><p>{{group}}</p></a>
-
-        {% endfor %}
-
+    <div class="container-xxl d-flex justify-content-between">
+        <table class="table table-hover w-50">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center" colspan="5">Машерова 17/4</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">Время</th>
+                    <th scope="col">Тренер</th>
+                    <th scope="col">Спорт</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Всего</th>
+                </tr>
+                {% for group in groups %}
+                    {% if group.address.id == 1 %}
+                        <tr>
+                            <td><a href="{% url 'detail_object' obj='group' id=group.id %}">{{group.time}}</a></td>
+                            <td>
+                                {% if group.trener.id %}
+                                    <a href="{% url 'detail_object' obj='trener' id=group.trener.id %}">{{group.trener}}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if group.sport_type == 'T' %} Тайский бокс
+                                {% elif group.sport_type == 'B' %} Классический бокс
+                                {% elif group.sport_type == 'M' %} MMA
+                                {% elif group.sport_type == 'W' %} Женская группа
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if group.gr_type == 'A' %} Взрослые
+                                {% elif group.gr_type == 'C' %} Дети
+                                {% endif %}
+                            </td>
+                            <td>{{group.clients_amount}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-hover w-50">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center" colspan="5">Свердлова 23</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="col">Время</th>
+                    <th scope="col">Тренер</th>
+                    <th scope="col">Спорт</th>
+                    <th scope="col">Тип</th>
+                    <th scope="col">Всего</th>
+                </tr>
+                {% for group in groups %}
+                    {% if group.address.id == 2 %}
+                        <tr>
+                            <td><a href="{% url 'detail_object' obj='group' id=group.id %}">{{group.time}}</a></td>
+                            <td>
+                                {% if group.trener.id %}
+                                    <a href="{% url 'detail_object' obj='trener' id=group.trener.id %}">{{group.trener}}</a>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if group.sport_type == 'T' %} Тайский бокс
+                                {% elif group.sport_type == 'B' %} Классический бокс
+                                {% elif group.sport_type == 'M' %} MMA
+                                {% elif group.sport_type == 'W' %} Женская группа
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if group.gr_type == 'A' %} Взрослые
+                                {% elif group.gr_type == 'C' %} Дети
+                                {% endif %}
+                            </td>
+                            <td>{{group.clients_amount}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
+{% endblock %}
+
+{% block pagination %}
 {% endblock %}

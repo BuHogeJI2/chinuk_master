@@ -1,12 +1,69 @@
 {% extends 'billing/base.html' %}
 
-{% block title %}Clients{% endblock %}
+{% block title %}Оплаты{% endblock %}
 
 {% block content %}
 
-    {% for payment in page_obj %}
-        {{payment}}<br>
-    {% endfor %}
+    <div class="container-xxl d-flex justify-content-between">
+        <table class="table table-hover w-50">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="5" class="text-center">В группу</th>
+                </tr>
+                <tr>
+                    <th scope="col">Дата</th>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Группа</th>
+                    <th scope="col">Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in page_obj %}
+                    {% if payment.payment_to == 'G' %}
+                        <tr>
+                            <td>{{payment.date}}</td>
+                            <td><a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client.name}}</a></td>
+                            <td>
+                                {% if payment.group.trener %} <a href="{% url 'detail_object' 'trener' payment.group.id %}">{{payment.group.trener}}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{payment.amount}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <table class="table table-hover w-50">
+            <thead>
+                <tr>
+                    <th scope="col" colspan="5" class="text-center">Индивидуалы</th>
+                </tr>
+                <tr>
+                    <th scope="col">Дата</th>
+                    <th scope="col">ФИО</th>
+                    <th scope="col">Тренер</th>
+                    <th scope="col">Сумма</th>
+                    <th scope="col">Приход</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in page_obj %}
+                    {% if payment.payment_to == 'I' %}
+                        <tr>
+                            <td>{{payment.date}}</td>
+                            <td><a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client.name}}</a></td>
+                            <td>
+                                {% if payment.trener %} <a href="{% url 'detail_object' 'trener' payment.trener.id %}">{{payment.trener}}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{payment.amount}} / {{payment.trener_part}}</td>
+                            <td>{{payment.total_amount}}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 
 {% endblock %}

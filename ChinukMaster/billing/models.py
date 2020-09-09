@@ -39,14 +39,14 @@ class Group(models.Model):
     class Meta:
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
+        ordering = ['time']
 
     def __str__(self):
+        return f'{self.time}, {self.trener}'
 
-        if self.trener:
-            name = self.trener.name.split()[0]
-        else:
-            name = 'Без тренера'
-        return ' '.join([name, str(self.time)])
+    def clients_amount(self):
+        clients = self.client_set.all()
+        return len(clients)
 
 class Client(models.Model):
     member_card = models.CharField(verbose_name='Членская карта', max_length=4, blank=True, null=True)
@@ -64,6 +64,12 @@ class Client(models.Model):
 
     def __str__(self):
         return self.name
+
+    def last_payment(self):
+        payments = self.payment_set.order_by('-date')
+        if payments:
+            return payments[0]
+        
          
     class Meta:
         verbose_name = 'Клиент'
@@ -111,9 +117,7 @@ class Payment(models.Model):
         return date.today()
 
     def total_amount(self):
-        if self.trener_part:
-            return self.amount - self.trener_part
-        return self.amount
+        return self.amount - self.trener_part
 
     def __str__(self):
         return f'{self.date}: {self.amount} BYN'
@@ -121,3 +125,4 @@ class Payment(models.Model):
     class Meta:
         verbose_name = 'Оплата'
         verbose_name_plural = 'Оплаты'
+        ordering = ['-date']
