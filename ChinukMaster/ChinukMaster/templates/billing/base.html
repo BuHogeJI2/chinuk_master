@@ -63,7 +63,8 @@
                   Оплаты
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'show_objects' obj='payment' %}">Просмотр</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_payments' obj='groups' %}">В группу</a></li>
+                  <li><a class="dropdown-item" href="{% url 'show_payments' obj='individuals' %}">Индивидуалы</a></li>
                   <li><a class="dropdown-item" href="{% url 'new_object' obj='payment' %}">Добавить новую</a></li>
                 </ul>
               </li>

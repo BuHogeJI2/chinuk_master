@@ -107,6 +107,26 @@ def show_objects(request, obj):
         'page_obj' : page_obj,
     })
 
+def show_payments(request, obj):
+    payments = Payment.objects.all()
+
+    payments_group = Payment.objects.filter(payment_to='G')
+    payments_individuals = Payment.objects.filter(payment_to='I')
+
+    if obj == 'groups':
+        paginator = Paginator(payments_group, 15)
+    elif obj == 'individuals':
+        paginator = Paginator(payments_individuals, 15)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'billing/show/payments.html', {
+        'payment_type' : obj,
+        'page_obj' : page_obj, 
+
+    })
+
 def detail_object(request, obj, id):
 
     inst = obj_values[obj].objects.get(id=id)
