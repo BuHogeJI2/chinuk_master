@@ -114,29 +114,42 @@ def detail_object(request, obj, id):
         f'{obj}' : inst,
     })
 
-def add_new_object(request, obj):
-
+def new_object(request, obj):
     form = obj_forms[obj]
 
     if request.method == 'POST':
         form = form(request.POST)
         if form.is_valid():
-            obj = form.save()
-            return HttpResponse(obj)
+            inst = form.save()
+            return redirect('detail_object', obj, inst.id)
     else:
-        return render(request, 'billing/new_object.html', {
-            'obj' : obj,
+        return render(request, 'billing/object_form.html', {
+            'obj' : inst,
+            'form' : form,
+        })
+
+def edit_object(request, obj, id):
+    inst = obj_values[obj].objects.get(id=id)
+
+    if request.method == 'POST':
+        form = obj_forms[obj](request.POST, instance=inst)
+        if form.is_valid():
+            inst = form.save()
+            return redirect('detail_object', obj, inst.id)
+    else:
+        form = obj_forms[obj](instance=inst)
+        return render(request, 'billing/object_form.html', {
+            'obj' : inst,
             'form' : form,
         })
 
 def delete_object(request, obj, id):
-
     inst = obj_values[obj].objects.get(id=id)
     inst.delete()
 
     show_obj_link = f'{obj}s' if obj != 'address' else f'{obj}es'
 
-    return redirect('show_objects', show_obj_link)
+    return redirect('show_objects', obj)
 
 def get_report(request):
     payments = Payment.objects.all()

@@ -22,7 +22,11 @@
                     {% if payment.payment_to == 'G' %}
                         <tr>
                             <td>{{payment.date}}</td>
-                            <td><a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client.name}}</a></td>
+                            <td>
+                                {% if payment.client %}
+                                    <a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client.name}}</a>
+                                {% endif %}
+                            </td>
                             <td>
                                 {% if payment.group.trener %} <a href="{% url 'detail_object' 'trener' payment.group.id %}">{{payment.group.trener}}</a>
                                 {% endif %}

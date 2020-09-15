@@ -94,7 +94,7 @@ class Address(models.Model):
         return self.address
 
 class Payment(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.PROTECT, verbose_name='Плательщик')
+    client = models.ForeignKey(Client, on_delete=models.SET_NULL, verbose_name='Плательщик', null=True)
 
     payment_to_choices = [
         ('G', 'В группу'),

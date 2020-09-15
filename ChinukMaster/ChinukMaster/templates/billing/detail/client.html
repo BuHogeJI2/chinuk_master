@@ -4,50 +4,61 @@
 
 {% block content %}
 
-    <div class="detail-photo">
-
-    </div>
-
-    <div class="detail-info">
-        
-        <p>Членская карта: {{client.member_card}}</p>
-        <p>ФИО: {{client.name}}</p>
-        <p>Номер телефона: {{client.tel_number}}</p>
-
-        {% if client.info %}
-            <p>Дополнительная информация: {{client.info}}</p>
-        {% endif %}
-
-        {% if client.cl_type == 'G' or client.cl_type == 'B' %}
-            <p>Группы:</p>
-            {% for group in groups %}
-                <p> - {{group}}</p>
-            {% endfor %}
-
-        {% endif %}
-
-        {% if client.cl_type == 'I' or client.cl_type == 'B' %}
-            <p>Тренеры:</p>
-            {% for trener in client.treners.all %}
-                <p> - {{trener}}</p>
-            {% endfor %}
-
-        {% endif %}
-
-    </div>
-
-    <div class="payment-history">
-
-        {% if client.payment_set.all %}
-
-            <p>История оплат</p>
-
-            {% for payment in client.payment_set.all %}
-                <p> - {{payment}}</p>
-            {% endfor %}
-
-        {% endif %}
-
+    <div class="container-xxl">
+        <div class="row">
+            <div class="col">
+                <div class="detail-photo border d-flex justify-content-center">
+                    {% if client.photo %}
+                        <img src="{{trener.photo.url}}" alt="{{trener.name}}" class="rounded w-50 h-50">
+                    {% else %}
+                        <img src="/media/billing/media/unknown.png" alt="unknown user" class="rounded w-50 h-50">
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col">
+                <div class="row h-75 border">
+                    <div class="col">
+                        {% if client.member_card %}
+                            <h1>{{client.member_card}}</h1>
+                        {% endif %}
+                        <h2>{{client.name}}</h2>
+                        <p>{{client.tel_number}}</p>
+                        {% if client.info %}
+                            <p>{{client.info}}</p>
+                        {% endif %}
+                        <p>Тип клиента: 
+                            {% if client.cl_type == 'I' %} Индивидуал
+                            {% elif client.cl_type == 'G' %} В группе
+                            {% elif client.cl_type == 'B' %} Смешанный
+                            {% endif %}
+                        </p>
+                        {% if client.cl_type == 'I' or client.cl_type == 'B' %} 
+                            {% if client.treners.all %}
+                                <p>Тренеруется у:</p>
+                                {% for trener in client.treners.all %}
+                                    <p> - <a href="{% url 'detail_object' 'trener' trener.id %}">{{trener.name}}</a></p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                        {% if client.cl_type == 'G' or client.cl_type == 'B' %} 
+                            {% if client.groups.all %}
+                                <p>Группы:</p>
+                                {% for group in client.groups.all %}
+                                    <p> - <a href="{% url 'detail_object' 'group' group.id %}">{{group}}</a></p>
+                                {% endfor %}
+                            {% endif %}
+                        {% endif %}
+                        <p>Последняя оплата: {{client.last_payment.date}} | {{client.last_payment.amount}} BYN</p>
+                    </div>
+                </div>
+                <div class="row h-25 border">
+                    <div class="col">
+                        <a href="{% url 'edit_object' obj='client' id=client.id %}" class="btn btn-info m-3">Изменить</a>
+                        <a href="{% url 'delete_object' obj='client' id=client.id %}" class="btn btn-danger m-3">Удалить</a>  
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

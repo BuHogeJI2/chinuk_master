@@ -3,22 +3,7 @@
     display: none;
 }
 
-
-.container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-items: flex-start;
-}
-
-.content {
-    margin: 20px;
-}
-
 .detail-photo {
-    width: 240px;
-    height: 320px;
-    background-color: darkgrey;
-    color: red;
+    width: 600px;
+    height: 800px;
 }
-
