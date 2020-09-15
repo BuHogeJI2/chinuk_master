@@ -6,9 +6,9 @@
 
     <h2>{{today}}</h2>
 
-    <table cellpadding='10' border="1px solid black">
+    <table cellpadding='10' class="table table-hover">
         <tr>
-            <th colspan="5">Группы</th>
+            <th colspan="5" class="text-center">Группы</th>
         </tr>
 
         <tr>
@@ -34,7 +34,7 @@
     {% endfor %}
 
     <tr>
-        <th colspan="5">Индивидуалы</th>
+        <th colspan="5" class="text-center">Индивидуалы</th>
     </tr>
 
     <tr>
@@ -64,7 +64,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>{{result}}</td>
+        <td>{{total_payment}}</td>
     </tr>
 
 </table>

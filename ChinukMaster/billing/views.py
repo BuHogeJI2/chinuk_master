@@ -36,10 +36,7 @@ def total_payment(payments, date=date.today()):
     result = 0
     for payment in payments:
         if payment.date >= date:
-            if payment.payment_to == 'G':
-                result += payment.amount
-            else:
-                result += payment.total_amount()
+            result += payment.total_amount()
 
     return result
 
@@ -189,5 +186,5 @@ def get_report(request):
     payments = Payment.objects.all()
     return render(request, 'billing/report.html', {
         'payments': payments,
-        'result' : total_payment(payments, date.today()),
+        'total_payment' : total_payment(payments, date.today()),
     })
