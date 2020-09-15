@@ -49,6 +49,7 @@
                             {% endif %}
                         {% endif %}
                         <p>Последняя оплата: {{client.last_payment.date}} | {{client.last_payment.amount}} BYN</p>
+                        <a href="{% url 'payments_history' 'client' client.id %}" class="btn btn-warning">История оплат</a>
                     </div>
                 </div>
                 <div class="row h-25 border">

@@ -12,5 +12,7 @@ urlpatterns = [
     path('delete/<slug:obj>/<int:id>', views.delete_object, name='delete_object'),
     path('new/<slug:obj>', views.new_object, name='new_object'),
 
+    path('<slug:obj>/<int:id>/payments/history', views.payments_history, name='payments_history'),
+
     path('report', views.get_report, name='get_report'),
 ]

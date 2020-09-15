@@ -1,0 +1,37 @@
+{% extends 'billing/base.html' %}
+
+{% block title %}История оплат / {{inst}}{% endblock %}
+
+{% block content %}
+
+    <div class="container-xxl d-flex justify-content-center">
+        <table class="table w-75">
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center">#</th>
+                    <th scope="col" class="text-center">Дата</th>
+                    <th scope="col" class="text-center">Куда</th>
+                    <th scope="col" class="text-center">Кому</th>
+                    <th scope="col" class="text-center">Сумма</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for payment in page_obj %}
+                    <tr>
+                        <th scope="row">{{payment.id}}</th>
+                        <td class="text-center">{{payment.date}}</td>
+                        {% if payment.payment_to == 'G' %} 
+                            <td class="text-center">В группу</td> 
+                            <td class="text-center"><a href="{% url 'detail_object' 'group' payment.group.id %}">{{payment.group.trener}}</a></td>
+                        {% elif payment.payment_to == 'I' %} 
+                            <td class="text-center">Индивидуалка</td>
+                            <td class="text-center">{{payment.trener.name}}</td>
+                        {% endif %} 
+                        <td class="text-center">{{payment.amount}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

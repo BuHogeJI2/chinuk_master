@@ -124,7 +124,7 @@ def new_object(request, obj):
             return redirect('detail_object', obj, inst.id)
     else:
         return render(request, 'billing/object_form.html', {
-            'obj' : inst,
+            'obj' : obj,
             'form' : form,
         })
 
@@ -150,6 +150,20 @@ def delete_object(request, obj, id):
     show_obj_link = f'{obj}s' if obj != 'address' else f'{obj}es'
 
     return redirect('show_objects', obj)
+
+def payments_history(request, obj, id):
+    inst = obj_values[obj].objects.get(id=id)
+
+    payments = inst.payment_set.all()
+
+    paginator = Paginator(payments, 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'billing/payments_history.html', {
+        'inst' : inst,
+        'page_obj' : page_obj,
+    })
 
 def get_report(request):
     payments = Payment.objects.all()
