@@ -1,6 +1,6 @@
 {% extends 'billing/base.html' %}
 
-{% block title %}REPORT{% endblock %}
+{% block title %}Report{% endblock %}
 
 {% block content %}
 
@@ -59,13 +59,16 @@
         {%endif%}
     {% endfor %}
     
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>{{total_payment}}</td>
-    </tr>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <th scope="row">{{total_payment}}</th>
+        </tr>
+    </tbody>
+    
 
 </table>
 
