@@ -40,11 +40,12 @@ var new_payment_fields = function() {
 };
 
 function MAIN() {
+
     title = document.getElementById('title').innerHTML;
     
-    if (title == 'ADD PAYMENT') {
+    if (title == 'New payment') {
         new_payment_fields();
-    } else if (title == 'ADD NEW CLIENT') {
+    } else if (title == 'New client') {
         new_cient_fields();
     }
 };

@@ -32,7 +32,7 @@
                                     {% if payment.group.trener %} <a href="{% url 'detail_object' 'trener' payment.group.id %}">{{payment.group.trener}}</a>
                                     {% endif %}
                                 </td>
-                                <td>{{payment.amount}}</td>
+                                <td><a href="{% url 'detail_object' 'payment' payment.id %}">{{payment.amount}}</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -67,7 +67,7 @@
                                     {% endif %}
                                 </td>
                                 <td>{{payment.amount}} / {{payment.trener_part}}</td>
-                                <td>{{payment.total_amount}}</td>
+                                <td><a href="{% url 'detail_object' 'payment' payment.id %}">{{payment.total_amount}}</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}

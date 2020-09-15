@@ -5,7 +5,7 @@
 {% block content %} 
 
     <p>Дата оплаты: {{payment.date}}</p>
-    <p>Клиент: <a href="{% url 'client' payment.client.id %}">{{payment.client}}</a></p>
+    <p>Клиент: <a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client}}</a></p>
     <p>Тип оплаты: 
         {% if payment.payment_type == 'O' %}
             Разовый
