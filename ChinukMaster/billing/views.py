@@ -93,7 +93,7 @@ def show_objects(request, obj):
 
     inst = obj_values[obj].objects.all()
 
-    paginator = Paginator(inst, 15)
+    paginator = Paginator(inst, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
@@ -111,9 +111,9 @@ def show_payments(request, obj):
     payments_individuals = Payment.objects.filter(payment_to='I')
 
     if obj == 'groups':
-        paginator = Paginator(payments_group, 15)
+        paginator = Paginator(payments_group, 20)
     elif obj == 'individuals':
-        paginator = Paginator(payments_individuals, 15)
+        paginator = Paginator(payments_individuals, 20)
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
@@ -173,7 +173,7 @@ def payments_history(request, obj, id):
 
     payments = inst.payment_set.all()
 
-    paginator = Paginator(payments, 15)
+    paginator = Paginator(payments, 20)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 

@@ -1,9 +1,9 @@
-a, a:visited, a:active {
+a.link, a.link:visited, a.link:active {
     text-decoration: underline;
     color: #212529;
 }
 
-a:hover {
+a.link:hover {
     color: cadetblue;
 }
 

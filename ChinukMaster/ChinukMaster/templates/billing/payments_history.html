@@ -22,7 +22,7 @@
                         <td class="text-center">{{payment.date}}</td>
                         {% if payment.payment_to == 'G' %} 
                             <td class="text-center">В группу</td> 
-                            <td class="text-center"><a href="{% url 'detail_object' 'group' payment.group.id %}">{{payment.group.trener}}</a></td>
+                            <td class="text-center"><a class="link" href="{% url 'detail_object' 'group' payment.group.id %}">{{payment.group.trener}}</a></td>
                         {% elif payment.payment_to == 'I' %} 
                             <td class="text-center">Индивидуалка</td>
                             <td class="text-center">{{payment.trener.name}}</td>

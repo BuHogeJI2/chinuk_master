@@ -4,7 +4,7 @@ from datetime import date
 
 class Trener(models.Model):
     name = models.CharField(max_length=50, verbose_name = 'Имя')
-    tel_number = models.CharField(max_length=20, verbose_name = 'Номер телефона')
+    tel_number = models.CharField(max_length=20, verbose_name = 'Номер телефона', null=True, blank=True)
     info = models.TextField(blank=True, null=False, verbose_name = 'Дополнительная информация')
     photo = models.ImageField(verbose_name='Фото', upload_to='billing/media/treners', height_field=None, width_field=None, null=True, blank=True)
 
@@ -13,7 +13,7 @@ class Trener(models.Model):
         verbose_name_plural = 'Тренеры'
 
     def __str__(self):
-        return self.name.split(' ')[0]
+        return self.name
 
 
 class Group(models.Model):
@@ -30,9 +30,15 @@ class Group(models.Model):
         ('M', 'ММА')
     ]
 
+    schedule_choice = [
+        ('uneven', 'пн. ср. пт.'),
+        ('even', 'вт. чт. сб.'),
+    ]
+
     gr_type = models.CharField(verbose_name='Возраст', max_length=1, choices=gr_type_choices, default='A')
     sport_type = models.CharField(verbose_name='Тип', max_length=1, choices = sport_type_choices, default='T')
     time = models.TimeField(verbose_name='Время')
+    schedule = models.CharField(verbose_name='Расписание', max_length=6, choices=schedule_choice, null=True, blank=True)
     trener = models.ForeignKey('Trener', verbose_name='Тренер', on_delete=models.SET_NULL, null=True, blank=True)
     address = models.ForeignKey('Address', verbose_name='Зал', on_delete=models.SET_NULL, null=True, blank=True)
 
@@ -42,7 +48,7 @@ class Group(models.Model):
         ordering = ['time']
 
     def __str__(self):
-        return f'{self.time}, {self.trener}'
+        return f'{self.address}, {self.time}, {self.trener}'
 
     def clients_amount(self):
         clients = self.client_set.all()
@@ -63,6 +69,8 @@ class Client(models.Model):
     groups = models.ManyToManyField(Group, verbose_name='Группа', blank=True)
 
     def __str__(self):
+        if self.member_card:
+            return f'{self.member_card} : {self.name}'
         return self.name
 
     def last_payment(self):
@@ -94,7 +102,7 @@ class Address(models.Model):
         return self.address
 
 class Payment(models.Model):
-    client = models.ForeignKey(Client, on_delete=models.SET_NULL, verbose_name='Плательщик', null=True)
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, verbose_name='Плательщик', null=True)
 
     payment_to_choices = [
         ('G', 'В группу'),
