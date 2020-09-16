@@ -45,10 +45,10 @@ class Group(models.Model):
     class Meta:
         verbose_name = 'Группа'
         verbose_name_plural = 'Группы'
-        ordering = ['time']
+        ordering = ['trener']
 
     def __str__(self):
-        return f'{self.address}, {self.time}, {self.trener}'
+        return f'{self.trener} {self.schedule} {self.time}'
 
     def clients_amount(self):
         clients = self.client_set.all()
