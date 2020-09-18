@@ -1,10 +1,14 @@
-a.link, a.link:visited, a.link:active {
-    text-decoration: underline;
+a.link-block, a.link-block:visited, a.link-block:active {
+    text-decoration: none;
     color: #212529;
 }
 
-a.link:hover {
-    color: cadetblue;
+a.link-block:hover {
+    color: white;
+}
+
+div.link-block:hover {
+    background-color: cadetblue;
 }
 
 
