@@ -125,10 +125,18 @@ def show_payments(request, obj):
     })
 
 def detail_object(request, obj, id):
-
     inst = obj_values[obj].objects.get(id=id)
+    page_obj = ''
+
+    if obj == 'group':
+        clients = inst.client_set.all()
+        paginator = Paginator(clients, 50)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
     return render(request, f'billing/detail/{obj}.html', {
         f'{obj}' : inst,
+        'page_obj' : page_obj,
     })
 
 def new_object(request, obj):
