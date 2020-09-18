@@ -15,6 +15,9 @@ class Trener(models.Model):
     def __str__(self):
         return self.name
 
+    def last_name(self):
+        return self.name.split(" ")[0]
+
 
 class Group(models.Model):
 
