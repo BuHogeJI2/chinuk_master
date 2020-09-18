@@ -36,12 +36,12 @@
                 </td>
                 <td>
                     {% for group in obj.groups.all %}
-                        <a href="{% url 'detail_object' obj='group' id=group.id %}">{{group.trener}}<br></a>
+                        <a href="{% url 'detail_object' obj='group' id=group.id %}">{{group.trener.last_name}}<br></a>
                     {% endfor %}
                 </td>
                 <td>
                     {% for trener in obj.treners.all %}
-                        <a href="{% url 'detail_object' obj='trener' id=trener.id %}">{{trener}}<br></a>
+                        <a href="{% url 'detail_object' obj='trener' id=trener.id %}">{{trener.last_name}}<br></a>
                     {% endfor %}
                 </td>
                 <td>
