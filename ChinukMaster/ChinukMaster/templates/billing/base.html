@@ -10,114 +10,135 @@
     <title id="title">{% block title %}BASE{% endblock %}</title>
 </head>
 <body>
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-xxl">
-          <a class="navbar-brand" href="{% url 'index' %}">ChinukMaster</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'get_report' %}">Отчет за сегодня</a>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Клиенты
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'show_objects' obj='client' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="{% url 'new_object' obj='client' %}">Добавить нового</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Тренеры
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'show_objects' obj='trener' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="{% url 'new_object' obj='trener' %}">Добавить нового</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Группы
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'show_objects' obj='group' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="{% url 'new_object' obj='group' %}">Добавить новую</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Залы
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'show_objects' obj='address' %}">Просмотр</a></li>
-                  <li><a class="dropdown-item" href="{% url 'new_object' obj='address' %}">Добавить новый</a></li>
-                </ul>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Оплаты
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li><a class="dropdown-item" href="{% url 'show_payments' obj='groups' %}">В группу</a></li>
-                  <li><a class="dropdown-item" href="{% url 'show_payments' obj='individuals' %}">Индивидуалы</a></li>
-                  <li><a class="dropdown-item" href="{% url 'new_object' obj='payment' %}">Добавить новую</a></li>
-                </ul>
-              </li>
-            </ul>
-            <form class="d-flex" method="POST" action="{% url 'search_result' %}">
-              {% csrf_token %}
-              <input class="form-control mr-2" type="search" placeholder="Введите данные" aria-label="Search" name="search_request"> 
-              <button class="btn btn-outline-success" type="submit">Поиск</button>
-            </form>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-xxl">
+            <a class="navbar-brand" href="{% url 'index' %}">ChinukMaster</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'get_report' %}">Отчет за сегодня</a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Клиенты
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'show_objects' obj='client' %}">Просмотр</a></li>
+                    <li><a class="dropdown-item" href="{% url 'new_object' obj='client' %}">Добавить нового</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Тренеры
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'show_objects' obj='trener' %}">Просмотр</a></li>
+                    <li><a class="dropdown-item" href="{% url 'new_object' obj='trener' %}">Добавить нового</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Группы
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'show_objects' obj='group' %}">Просмотр</a></li>
+                    <li><a class="dropdown-item" href="{% url 'new_object' obj='group' %}">Добавить новую</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Залы
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'show_objects' obj='address' %}">Просмотр</a></li>
+                    <li><a class="dropdown-item" href="{% url 'new_object' obj='address' %}">Добавить новый</a></li>
+                  </ul>
+                </li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Оплаты
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" href="{% url 'show_payments' obj='groups' %}">В группу</a></li>
+                    <li><a class="dropdown-item" href="{% url 'show_payments' obj='individuals' %}">Индивидуалы</a></li>
+                    <li><a class="dropdown-item" href="{% url 'new_object' obj='payment' %}">Добавить новую</a></li>
+                  </ul>
+                </li>
+              </ul>
+              <form class="d-flex" method="POST" action="{% url 'search_result' %}">
+                {% csrf_token %}
+                <input class="form-control mr-2" type="search" placeholder="Введите данные" aria-label="Search" name="search_request"> 
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+              </form>
+            </div>
           </div>
-        </div>
-    </nav>
+      </nav>
 
-    <main class="mt-5 mb-5">
-        <div class="container-xxl">
-            <div class="row">
-                <div class="col-xxl">
-                    {% block content %}
-                    {% endblock %}
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-xxl">
-                {% block pagination %}
-                  {% if page_obj %}
-                    <nav aria-label="Page navigation example">
-                      <ul class="pagination justify-content-center">
-                          <li class="page-item">
-                              {% if page_obj.has_previous %}
-                                  <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Previous</a>
-                              {% endif %}
-                          </li>
-          
-                          {% for index in page_obj.paginator.num_pages|times %}
-                              <li class="page-item"><a class="page-link" href="?page={{index}}">{{index}}</a></li>
-                          {% endfor %}
-          
-                          <li class="page-item">
-                              {% if page_obj.has_next %}
-                                  <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
-                              {% endif %}
-                          </li>
-                      </ul>
-                    </nav>
-                  {% endif %}
-                {% endblock %}
+      <main class="mt-5 mb-5">
+          <div class="container-xxl">
+              <div class="row">
+                  <div class="col-xxl">
+                      {% block content %}
+                      {% endblock %}
+                  </div>
               </div>
-            </div>
-        </div>
-    </main>
+              <div class="row">
+                <div class="col-xxl">
+                  {% block pagination %}
+                    {% if page_obj %}
+                      <nav aria-label="Page navigation example" class="mt-5">
+                        <ul class="pagination justify-content-center">
+                            <li class="page-item">
+                              {% if page_obj.has_previous %}
+                                <a class="page-link" href="?page={{page_obj.previous_page_number}}" tabindex="-1" aria-disabled="true">Предыдущая</a>
+                              {% endif %}
+                            </li>
 
-    <script src="{% static 'billing.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
-</body>
-</html>
+                            {% if page_obj.paginator.num_pages >= 10 %}
+                              <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+                              <li class="page-item disabled"><a class="page-link" href="">...</a></li>
+                              {% for num_page in page_obj.paginator.num_pages|neg_3_times %}
+                                {% if page_obj.number|add:num_page > 0 %}
+                                  <li class="page-item"><a class="page-link" href="?page={{page_obj.number|add:num_page}}">{{page_obj.number|add:num_page}}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                              <li class="page-item active"><a class="page-link" href="?page={{page_obj.number}}">{{page_obj.number}}</a></li>
+                              {% for num_page in page_obj.paginator.num_pages|pos_3_times %}
+                                {% if page_obj.number|add:num_page < page_obj.paginator.num_pages %}
+                                  <li class="page-item"><a class="page-link" href="?page={{page_obj.number|add:num_page}}">{{page_obj.number|add:num_page}}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                              <li class="page-item disabled"><a class="page-link" href="">...</a></li>
+                              <li class="page-item"><a class="page-link" href="?page={{page_obj.paginator.num_pages}}">{{page_obj.paginator.num_pages}}</a></li>
+                            {% else %}
+                              {% for num_page in page_obj.paginator.num_pages|times %}
+                                {% if page_obj.number == num_page %}
+                                  <li class="page-item active"><a class="page-link" href="?page={{num_page}}">{{num_page}}</a></li>
+                                {% else %}
+                                  <li class="page-item"><a class="page-link" href="?page={{num_page}}">{{num_page}}</a></li>
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %} 
+
+                            <li class="page-item">
+                              {% if page_obj.has_next %}
+                                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                              {% endif %}
+                            </li>
+                        </ul>
+                      </nav>
+                    {% endif %}
+                  {% endblock %}
+                </div>
+              </div>
+          </div>
+      </main>
+
+      <script src="{% static 'billing.js' %}"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+  </body>
+  </html>
