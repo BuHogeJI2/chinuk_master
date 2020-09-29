@@ -176,6 +176,20 @@ def delete_object(request, obj, id):
 
     return redirect('show_objects', obj)
 
+def delete_duplicated(request, obj, id):
+    inst = obj_values[obj].objects.get(id=id)
+    
+    if obj == 'group':
+        clients = inst.client_set.all()
+
+        for client in clients:
+            if (inst.client_set.filter(name=client.name).count() > 1 and 
+                    inst.client_set.filter(member_card=client.member_card).count() > 1):
+                client.delete()
+
+    return redirect('show_objects', obj)    
+    
+
 def payments_history(request, obj, id):
     inst = obj_values[obj].objects.get(id=id)
 

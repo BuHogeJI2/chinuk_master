@@ -1,17 +1,3 @@
-a.link-block, a.link-block:visited, a.link-block:active {
-    text-decoration: none;
-    color: #212529;
-}
-
-a.link-block:hover {
-    color: white;
-}
-
-div.link-block:hover {
-    background-color: cadetblue;
-}
-
-
 #id_treners, #id_trener, #id_trener_part {
     display: none;
 }

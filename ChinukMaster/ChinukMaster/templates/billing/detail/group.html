@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container-xxl d-flex flex-column align-items-center">
         <div class="row text-center mb-4 w-50">
-            <a href="{% url 'detail_object' 'trener' group.trener.id %}" class="link-block"><div class="col p-4 shadow rounded m-2 link-block">{{group.trener}}</div></a>
+            <a href="{% url 'detail_object' 'trener' group.trener.id %}" class="btn btn-info col p-4 shadow rounded m-2">{{group.trener}}</a>
         </div>
     </div>
     <div class="row mb-4 text-center">
@@ -20,7 +20,7 @@
         <div class="col p-4 shadow rounded m-2">
             Тип группы:
             {% if group.gr_type == 'A' %} Взрослая
-            {% else %}Т Детская
+            {% else %} Детская
             {% endif %}
         </div>
         <div class="col p-4 shadow rounded m-2">
@@ -32,10 +32,16 @@
         <div class="col p-4 shadow rounded m-2">Время: {{group.time}}</div>
     </div>
     <div class="container-xxl d-flex flex-column align-items-end">
-        <div class="row text-center mb-4 w-25">
-            <div class="col p-4 shadow rounded m-2">
+        <div class="row text-center mb-4 w-50">
+            <div class="col-6 p-4 shadow rounded m-2">
                 Адрес: {{group.address}}
             </div>
+            <a href="{% url 'delete_duplicated' 'group' group.id %}" class="btn btn-warning col p-4 shadow rounded m-2">
+                Очитстить повторы
+            </a>
+            <a href="{% url 'delete_object' 'group' group.id %}" class="btn btn-danger col p-4 shadow rounded m-2">
+                Удалить группу
+            </a>
         </div>
     </div>
     
