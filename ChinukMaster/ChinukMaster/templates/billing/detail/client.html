@@ -7,7 +7,7 @@
     <div class="container-xxl">
         <div class="row">
             <div class="col">
-                <div class="detail-photo border d-flex justify-content-center">
+                <div class="detail-photo d-flex justify-content-center">
                     {% if client.photo %}
                         <img src="{{trener.photo.url}}" alt="{{trener.name}}" class="rounded w-50 h-50">
                     {% else %}
@@ -16,7 +16,7 @@
                 </div>
             </div>
             <div class="col">
-                <div class="row h-75 border">
+                <div class="row h-75">
                     <div class="col">
                         {% if client.member_card %}
                             <h1>{{client.member_card}}</h1>

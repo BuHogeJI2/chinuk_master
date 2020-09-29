@@ -4,11 +4,9 @@
 
 {% block content %}
 
-    <div class="container-xxl d-flex flex-column justify-content-center align-items-center">
-        <h2>Добро пожаловать</h2>
-        <h3>в систему контроля и учета</h3>
-        <h1>ChinukMaster</h1>
-    </div>
+    <p>Всего зарегестрированных клиентов: {{ total_clients_count }} Из них инд.: ; групповые: ; смешанные: </p>
+    <p>Всего тренеров: {{ total_treners_count }}</p> 
+    <p>Всего групп: {{ total_groups_count }} Из них женск: ; взрослые: ; детские: ;</p>
 
 {% endblock %}
 

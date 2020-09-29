@@ -43,7 +43,15 @@ def total_payment(payments, date=date.today()):
 # Views
 
 def index(request):
-    return render(request, 'billing/index.html', {})
+    total_clients_count = Client.objects.all().count()
+    total_treners_count = Trener.objects.all().count()
+    total_groups_count = Group.objects.all().count()
+
+    return render(request, 'billing/index.html', {
+        'total_clients_count' : total_clients_count,
+        'total_treners_count' : total_treners_count,
+        'total_groups_count' : total_groups_count,
+    })
 
 def search_result(request):
 
