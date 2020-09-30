@@ -44,14 +44,12 @@
             </a>
         </div>
     </div>
-    
-    <hr>
 
-    <div class="row d-flex justify-content-center">
-        <table class="table table-hover">
+    <div class="row d-flex justify-content-center mt-4">
+        <table class="table table-hover w-75">
             <thead>
                 <tr class="text-center">
-                    <th scope="col" colspan="5">Клиенты</th>
+                    <th scope="col" colspan="5">Клиенты в группе</th>
                 </tr>
                 <tr class="text-center">
                     <th scope="col">Карточка</th>
@@ -64,8 +62,8 @@
             <tbody>
                 {% for client in page_obj %}
                     <tr class="text-center">
-                        <td><a href="{% url 'detail_object' obj='client' id=client.id %}">{{client.member_card}}</a></td>
-                        <td><a href="{% url 'detail_object' obj='client' id=client.id %}">{{client.name}}</a></td>
+                        <td><a class="link" href="{% url 'detail_object' obj='client' id=client.id %}">{{client.member_card}}</a></td>
+                        <td><a class="link" href="{% url 'detail_object' obj='client' id=client.id %}">{{client.name}}</a></td>
                         <td>{{client.tel_number}}</td>
                         <td>{{client.last_payment.date}}</td>
                         <td>{{client.last_payment.total_amount}}</td>

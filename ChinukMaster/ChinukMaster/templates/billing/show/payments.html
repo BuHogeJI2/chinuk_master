@@ -25,14 +25,20 @@
                                 <td>{{payment.date}}</td>
                                 <td>
                                     {% if payment.client %}
-                                        <a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client.name}}</a>
+                                        <a href="{% url 'detail_object' 'client' payment.client.id %}" class="link">{{payment.client.name}}</a>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    {% if payment.group.trener %} <a href="{% url 'detail_object' 'trener' payment.group.id %}">{{payment.group.trener}}</a>
+                                    {% if payment.group.trener %} 
+                                        <a href="{% url 'detail_object' 'trener' payment.group.id %}" class="link">
+                                            {{payment.group.trener.last_name}}, {{ payment.group.time }},
+                                            {% if payment.group.schedule == 'uneven' %} пн. ср. пт.
+                                            {% else %} вт. чт. сб. 
+                                            {% endif %}
+                                        </a>
                                     {% endif %}
                                 </td>
-                                <td><a href="{% url 'detail_object' 'payment' payment.id %}">{{payment.amount}}</a></td>
+                                <td><a href="{% url 'detail_object' 'payment' payment.id %}" class="link">{{payment.amount}}</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}
@@ -61,13 +67,13 @@
                         {% if payment.payment_to == 'I' %}
                             <tr>
                                 <td>{{payment.date}}</td>
-                                <td><a href="{% url 'detail_object' 'client' payment.client.id %}">{{payment.client.name}}</a></td>
+                                <td><a href="{% url 'detail_object' 'client' payment.client.id %}" class="link">{{payment.client.name}}</a></td>
                                 <td>
-                                    {% if payment.trener %} <a href="{% url 'detail_object' 'trener' payment.trener.id %}">{{payment.trener}}</a>
+                                    {% if payment.trener %} <a href="{% url 'detail_object' 'trener' payment.trener.id %}" class="link">{{payment.trener}}</a>
                                     {% endif %}
                                 </td>
                                 <td>{{payment.amount}} / {{payment.trener_part}}</td>
-                                <td><a href="{% url 'detail_object' 'payment' payment.id %}">{{payment.total_amount}}</a></td>
+                                <td><a href="{% url 'detail_object' 'payment' payment.id %}" class="link">{{payment.total_amount}}</a></td>
                             </tr>
                         {% endif %}
                     {% endfor %}

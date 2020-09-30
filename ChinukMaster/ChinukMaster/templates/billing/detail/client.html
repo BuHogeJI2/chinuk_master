@@ -61,7 +61,7 @@
                 {% if client.last_payment %}
                     <div class="row mb-3">
                         <div class="col-8">
-                            <a href="" class="p-3 shadow rounded w-100 btn btn-info">
+                            <a href="{% url 'detail_object' 'payment' client.last_payment.id %}" class="p-3 shadow rounded w-100 btn btn-info">
                                 Последняя оплата: {{client.last_payment.date}} | {{client.last_payment.amount}} BYN
                             </a>
                         </div>
