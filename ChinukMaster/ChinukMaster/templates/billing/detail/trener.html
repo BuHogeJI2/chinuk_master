@@ -6,38 +6,61 @@
 
     <div class="container-xxl">
         <div class="row">
-            <div class="col">
-                {% if trener.photo %}
-                    <div class="detail-photo d-flex justify-content-center">
-                        <img src="{{trener.photo.url}}" alt="{{trener.name}}" class="rounded w-75 h-75">
-                    </div>
-                {% endif %}
-            </div>
-            <div class="col">
-                <div class="row h-75">
-                    <div class="col">
-                        <h1>{{trener.name}}</h1>
-                        <p>{{trener.tel_number}}</p>
-                        {% if trener.info %}
-                            <p>Доп. информация: {{trener.info}}</p>
-                        {% endif %}
-                        <p>Группы: </p>
-                        {% for group in trener.group_set.all %}
-                            <a class="link" href="{% url 'detail_object' obj='group' id=group.id %}"><p>{{group}}</p></a>
-                        {% endfor %}
-                        <p>Индивидуалы: </p>
-                        {% for individual in trener.client_set.all %}
-                            <a class="link" href="{% url 'detail_object' obj='client' id=individual.id %}"><p>{{individual}}</p></a>
-                        {% endfor %}
-                    </div>
+            <div class="col-5">
+                <div class="row h-50">
+                    {% if trener.photo %}
+                        <div class="detail-photo d-flex justify-content-center">
+                            <img src="{{trener.photo.url}}" alt="{{trener.name}}" class="rounded w-50 h-50">
+                        </div>
+                    {% endif %}
                 </div>
-                <div class="row h-25">
-                    <div class="col">
-                        <div class="row">
+            </div>
+            <div class="col-7">
+                <div class="row h-100">
+                    <div class="col text-center">
+                        <div class="row mb-3">
                             <div class="col">
-                                <a href="{% url 'edit_object' obj='trener' id=trener.id %}" class="btn btn-info m-3">Изменить</a>
-                                <a href="{% url 'delete_object' obj='trener' id=trener.id %}" class="btn btn-danger m-3">Удалить</a>
+                                <a href="{% url 'edit_object' 'trener' trener.id %}" class="btn btn-warning p-4 w-100 shadow rounded">Изменить</a>
                             </div>
+                            <div class="col">
+                                <a href="{% url 'delete_object' 'trener' trener.id %}" class="btn btn-danger p-4 w-100 shadow rounded">Удалить</a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <h5 class="p-4 rounded shadow">{{ trener.name }}</h5>
+                        </div>
+                        {% if trener.info %}
+                            <div class="row">
+                                <p class="p-4 rounded shadow">{{ trener.info}}</p>
+                            </div>
+                        {% endif %}
+                        <div class="row">
+                            <p class="p-4 rounded shadow">{{ trener.tel_number }}</p>
+                        </div>
+                        <div class="row">
+                            {% if trener.group_set.all %}
+                                <div class="col-6">
+                                    <p class="p-4 rounded shadow">Группы:</p> 
+                                    {% for group in trener.group_set.all %}
+                                        <p><a class="btn btn-info p-4 shadow rounded w-100" href="{% url 'detail_object' 'group' group.id %}">
+                                            {{ group.time }}, 
+                                            {% if group.schedule == 'uneven' %}
+                                                пн. ср. пт. {% else %} вт. чт. сб. 
+                                            {% endif %} 
+                                        </a></p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            {% if trener.client_set.all %}
+                                <div class="col-6">
+                                    <p class="p-4 rounded shadow">Индивидуалы: </p>
+                                    {% for individual in trener.client_set.all %}
+                                        <p><a class="btn btn-info p-4 shadow rounded w-100" href="{% url 'detail_object' 'client' individual.id %}">
+                                            {{ individual }}
+                                        </a></p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>

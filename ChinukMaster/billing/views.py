@@ -9,11 +9,11 @@ from datetime import date, timedelta
 # Global varibles
 
 obj_values = {
-        'trener' : Trener, 
-        'client' : Client,
-        'group'  : Group,
-        'payment': Payment,
-        'address': Address,
+    'trener' : Trener, 
+    'client' : Client,
+    'group'  : Group,
+    'payment': Payment,
+    'address': Address,
     }
 
 obj_forms = {
@@ -43,14 +43,11 @@ def total_payment(payments, date=date.today()):
 # Views
 
 def index(request):
-    total_clients_count = Client.objects.all().count()
-    total_treners_count = Trener.objects.all().count()
-    total_groups_count = Group.objects.all().count()
 
     return render(request, 'billing/index.html', {
-        'total_clients_count' : total_clients_count,
-        'total_treners_count' : total_treners_count,
-        'total_groups_count' : total_groups_count,
+        'trener_model' : Trener, 
+        'client_model' : Client,
+        'group_model'  : Group,
     })
 
 def search_result(request):
@@ -133,6 +130,7 @@ def show_payments(request, obj):
     })
 
 def detail_object(request, obj, id):
+    model = obj_values[obj]
     inst = obj_values[obj].objects.get(id=id)
     page_obj = ''
 
@@ -143,6 +141,7 @@ def detail_object(request, obj, id):
         page_obj = paginator.get_page(page_number)
 
     return render(request, f'billing/detail/{obj}.html', {
+        f'{obj}_model' : model,
         f'{obj}' : inst,
         'page_obj' : page_obj,
     })
