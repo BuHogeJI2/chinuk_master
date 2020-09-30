@@ -18,6 +18,10 @@ class Trener(models.Model):
     def last_name(self):
         return self.name.split(" ")[0]
 
+    @staticmethod
+    def total_count():
+        return Trener.objects.all().count()
+
 
 class Group(models.Model):
 
@@ -57,6 +61,10 @@ class Group(models.Model):
         clients = self.client_set.all()
         return len(clients)
 
+    @staticmethod
+    def total_count():
+        return Group.objects.all().count()
+
 class Client(models.Model):
     member_card = models.CharField(verbose_name='Членская карта', max_length=4, blank=True, null=True)
     name = models.CharField(verbose_name='ФИО', max_length=50, blank=True, null=True)
@@ -80,6 +88,10 @@ class Client(models.Model):
         payments = self.payment_set.order_by('-date')
         if payments:
             return payments[0]
+
+    @staticmethod
+    def total_count():
+        return Client.objects.all().count()
         
          
     class Meta:
