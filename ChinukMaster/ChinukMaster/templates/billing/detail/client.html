@@ -6,7 +6,7 @@
 
     <div class="container-xxl">
         <div class="row">
-            <div class="col">
+            <div class="col-4">
                 <div class="detail-photo d-flex justify-content-center">
                     {% if client.photo %}
                         <img src="{{trener.photo.url}}" alt="{{trener.name}}" class="rounded w-50 h-50">
@@ -15,48 +15,87 @@
                     {% endif %}
                 </div>
             </div>
-            <div class="col">
-                <div class="row h-75">
+            <div class="col-8">
+                <div class="row mb-3">
                     <div class="col">
-                        {% if client.member_card %}
-                            <h1>{{client.member_card}}</h1>
-                        {% endif %}
-                        <h2>{{client.name}}</h2>
-                        <p>{{client.tel_number}}</p>
-                        {% if client.info %}
-                            <p>{{client.info}}</p>
-                        {% endif %}
-                        <p>Тип клиента: 
+                        <a href="{% url 'edit_object' obj='client' id=client.id %}" class="btn btn-warning p-3 w-100 rounded shadow">
+                            Изменить
+                        </a>
+                    </div>
+                    <div class="col">
+                        <a href="{% url 'delete_object' obj='client' id=client.id %}" class="btn btn-danger p-3 w-100 rounded shadow">Удалить</a>  
+                    </div>
+                </div>
+                <div class="row text-center">
+                    {% if client.member_card %}
+                        <div class="col-3">
+                            <h4 class="p-3 shadow rounded">{{ client.member_card }}</h4>
+                        </div>
+                    {% endif %}
+                    <div class="col">
+                        <h4 class="p-3 shadow rounded">{{ client.name }}</h4>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    {% if client.tel_number %}
+                        <div class="col-6">
+                            <p class="p-3 shadow rounded">{{ client.tel_number }}</p>
+                        </div>
+                    {% endif %}
+                    <div class="col">
+                        <p class="p-3 shadow rounded">Тип клиента: 
                             {% if client.cl_type == 'I' %} Индивидуал
                             {% elif client.cl_type == 'G' %} В группе
                             {% elif client.cl_type == 'B' %} Смешанный
                             {% endif %}
                         </p>
-                        {% if client.cl_type == 'I' or client.cl_type == 'B' %} 
-                            {% if client.treners.all %}
-                                <p>Тренеруется у:</p>
-                                {% for trener in client.treners.all %}
-                                    <p> - <a href="{% url 'detail_object' 'trener' trener.id %}">{{trener.name}}</a></p>
-                                {% endfor %}
-                            {% endif %}
-                        {% endif %}
-                        {% if client.cl_type == 'G' or client.cl_type == 'B' %} 
-                            {% if client.groups.all %}
-                                <p>Группы:</p>
-                                {% for group in client.groups.all %}
-                                    <p> - <a href="{% url 'detail_object' 'group' group.id %}">{{group}}</a></p>
-                                {% endfor %}
-                            {% endif %}
-                        {% endif %}
-                        <p>Последняя оплата: {{client.last_payment.date}} | {{client.last_payment.amount}} BYN</p>
-                        <a href="{% url 'payments_history' 'client' client.id %}" class="btn btn-warning">История оплат</a>
                     </div>
                 </div>
-                <div class="row h-25 border">
-                    <div class="col">
-                        <a href="{% url 'edit_object' obj='client' id=client.id %}" class="btn btn-info m-3">Изменить</a>
-                        <a href="{% url 'delete_object' obj='client' id=client.id %}" class="btn btn-danger m-3">Удалить</a>  
+                <div class="row">
+                    {% if client.info %}
+                        <div class="col">
+                            <p class="p-3 shadow rounded">{{client.info}}</p>
+                        </div>
+                    {% endif %}
+                </div>
+                {% if client.last_payment %}
+                    <div class="row mb-3">
+                        <div class="col-8">
+                            <a href="" class="p-3 shadow rounded w-100 btn btn-info">
+                                Последняя оплата: {{client.last_payment.date}} | {{client.last_payment.amount}} BYN
+                            </a>
+                        </div>
+                        <div class="col-4">
+                            <a href="{% url 'payments_history' 'client' client.id %}" class="btn btn-info p-3 rounded shadow w-100">
+                                История оплат
+                            </a>
+                        </div>
                     </div>
+                {% endif %}
+                <div class="row">
+                    {% if client.groups.all %}
+                        <div class="col">
+                            <p class="shadow rounded p-3 text-center">Группы: </p>
+                            {% for group in client.groups.all %}
+                                <p><a href="{% url 'detail_object' 'group' group.id %}" class="p-3 rounded shadow btn btn-info w-100">
+                                    {{ group.trener.name }}, {{ group.time }}, 
+                                    {% if group.schedule == 'uneven' %} пн. ср. пт. 
+                                    {% else %} вт. чт. сб.
+                                    {% endif %} 
+                                </a></p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    {% if client.treners.all %}
+                        <div class="col">
+                            <p class="shadow rounded p-3 text-center">Тренеры: </p>
+                            {% for trener in client.treners.all %}
+                                <p><a href="{% url 'detail_object' 'trener' trener.id %}" class="p-3 rounded shadow btn btn-info w-100">
+                                    {{ trener.name }}
+                                </a></p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
